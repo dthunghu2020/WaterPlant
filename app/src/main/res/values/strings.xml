@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Water Plan</string>
+    <string name="water">water</string>
+    <string name="fertilize">fertilize</string>
+    <string name="spray">spray</string>
+    <string name="prune">prune</string>
+</resources>
