@@ -1,4 +1,4 @@
-package com.hungdt.waterplan.view;
+package com.hungdt.waterplan.view.adater;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hungdt.waterplan.R;
 import com.hungdt.waterplan.model.Plant;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> {
 
@@ -43,29 +41,27 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
         //holder.imgPlanAvatar
         holder.txtPlanName.setText(plant.getPlantName());
 
-
-        if(!plant.getReminds().get(position).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.water))){
-            holder.llPlanWater.setVisibility(View.GONE);
-        }else {
-            holder.txtPlanWater.setText(plant.getReminds().get(position).getCareCycle()+" days");
-        }
-
-        if(!plant.getReminds().get(position).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.fertilize))){
-            holder.llPlanFertilizer.setVisibility(View.GONE);
-        }else {
-            holder.txtPlanFertilizer.setText(plant.getReminds().get(position).getCareCycle()+" days");
-        }
-
-        if(!plant.getReminds().get(position).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.spray))){
-            holder.llSpray.setVisibility(View.GONE);
-        }else {
-            holder.txtSpray.setText(plant.getReminds().get(position).getCareCycle()+" days");
-        }
-
-        if(!plant.getReminds().get(position).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.prune))){
-            holder.llPrune.setVisibility(View.GONE);
-        }else {
-            holder.txtPrune.setText(plant.getReminds().get(position).getCareCycle()+" days");
+        if(plants!=null){
+            if(!plant.getReminds().get(position).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.water))){
+                holder.llPlanWater.setVisibility(View.GONE);
+            }else {
+                holder.txtPlanWater.setText(plant.getReminds().get(position).getCareCycle()+" days");
+            }
+            if(!plant.getReminds().get(position).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.fertilize))){
+                holder.llPlanFertilizer.setVisibility(View.GONE);
+            }else {
+                holder.txtPlanFertilizer.setText(plant.getReminds().get(position).getCareCycle()+" days");
+            }
+            if(!plant.getReminds().get(position).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.spray))){
+                holder.llSpray.setVisibility(View.GONE);
+            }else {
+                holder.txtSpray.setText(plant.getReminds().get(position).getCareCycle()+" days");
+            }
+            if(!plant.getReminds().get(position).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.prune))){
+                holder.llPrune.setVisibility(View.GONE);
+            }else {
+                holder.txtPrune.setText(plant.getReminds().get(position).getCareCycle()+" days");
+            }
         }
     }
 

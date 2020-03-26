@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import com.hungdt.waterplan.R;
 import com.hungdt.waterplan.database.DBHelper;
 import com.hungdt.waterplan.model.Plant;
-import com.hungdt.waterplan.model.Remind;
+import com.hungdt.waterplan.view.adater.PlantAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,23 +29,20 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ADD_PLANT = 100;
     private List<Plant> plants = new ArrayList<>();
 
-    private DBHelper db;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        db = new DBHelper(this);
-
-        db.addPlan("Name",null,"abc");
-        db.addRemind(String.valueOf(db.getLastPlanID()),getBaseContext().getString(R.string.water),"27-03-2020 16:05","5");
-        db.addRemind(String.valueOf(db.getLastPlanID()),getBaseContext().getString(R.string.fertilize),"27-03-2020 16:05","45");
-
+        /*DBHelper.getInstance(this).addPlan("Name",null,"abc");
+        DBHelper.getInstance(this).addRemind(String.valueOf(DBHelper.getInstance(this).getLastPlanID()),getBaseContext().getString(R.string.water),"27-03-2020 16:05","5");
+        DBHelper.getInstance(this).addRemind(String.valueOf(DBHelper.getInstance(this).getLastPlanID()),getBaseContext().getString(R.string.fertilize),"27-03-2020 16:05","45");
         List<Remind> reminds = new ArrayList<>();
         reminds.add(new Remind("1",getBaseContext().getString(R.string.water),"27-03-2020 16:05","5"));
-        plants.add(new Plant("1",null,"name","note",reminds));
+        plants.add(new Plant("1",null,"name","note",reminds));*/
 
         initView();
+
+        plants.addAll(DBHelper.getInstance(this).getAllPlant());
         plantAdapter = new PlantAdapter(this,plants);
         rcvPlan.setLayoutManager(new LinearLayoutManager(this));
         rcvPlan.setAdapter(plantAdapter);

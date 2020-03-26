@@ -3,13 +3,15 @@ package com.hungdt.waterplan.model;
 public class Remind {
     private String remindID;
     private String remindType;
-    private String remindDateTime;
+    private String remindDate;
+    private String remindTime;
     private String careCycle;
 
-    public Remind( String remindID, String remindType, String remindDateTime, String careCycle) {
+    public Remind(String remindID, String remindType, String remindDate, String remindTime, String careCycle) {
         this.remindID = remindID;
         this.remindType = remindType;
-        this.remindDateTime = remindDateTime;
+        this.remindDate = remindDate;
+        this.remindTime = remindTime;
         this.careCycle = careCycle;
     }
 
@@ -29,12 +31,20 @@ public class Remind {
         this.remindType = remindType;
     }
 
-    public String getRemindDateTime() {
-        return remindDateTime;
+    public String getRemindDate() {
+        return remindDate;
     }
 
-    public void setRemindDateTime(String remindDateTime) {
-        this.remindDateTime = remindDateTime;
+    public void setRemindDate(String remindDate) {
+        this.remindDate = remindDate;
+    }
+
+    public String getRemindTime() {
+        return remindTime;
+    }
+
+    public void setRemindTime(String remindTime) {
+        this.remindTime = remindTime;
     }
 
     public String getCareCycle() {

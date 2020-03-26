@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/imgBack"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_15sdp"
             android:src="@drawable/ic_x" />
@@ -31,8 +31,8 @@
 
         <ImageView
             android:id="@+id/imgDeletePlant"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_toStartOf="@id/txtSave"
@@ -57,12 +57,12 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgCamera"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_toStartOf="@+id/planAvatar"
-            android:background="#123123" />
+            android:src="@drawable/ic_camera" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgGallery"
@@ -71,30 +71,43 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_toEndOf="@+id/planAvatar"
-            android:background="#06685C" />
+            android:src="@drawable/ic_gallery" />
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/edtPlanName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtWrapper1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_50sdp"
-        android:hint="Plan Name"
         app:hintEnabled="true"
-        app:layout_constraintTop_toBottomOf="@+id/avatar" />
+        app:layout_constraintTop_toBottomOf="@+id/avatar">
 
-    <EditText
-        android:id="@+id/edtPlanNote"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPlanName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Plan Name" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtWrapper2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:hint="Note"
         app:hintEnabled="true"
-        app:layout_constraintTop_toBottomOf="@+id/edtPlanName" />
+        app:layout_constraintTop_toBottomOf="@+id/edtWrapper1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPlanNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Note" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvListCareSchedule"
@@ -102,7 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:padding="@dimen/_5sdp"
-        app:layout_constraintTop_toBottomOf="@+id/edtPlanNote" />
+        app:layout_constraintTop_toBottomOf="@+id/edtWrapper2" />
 
     <LinearLayout
         android:id="@+id/addCareSchedule"

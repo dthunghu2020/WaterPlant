@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorWater">#BA3AE1F6</color>
+    <color name="colorFertilizer">#9c5518</color>
+    <color name="colorSpray">#84A9AC</color>
+    <color name="colorPrune">#7F78D2</color>
 </resources>
