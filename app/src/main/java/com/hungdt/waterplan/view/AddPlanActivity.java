@@ -1,9 +1,12 @@
 package com.hungdt.waterplan.view;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -101,15 +104,22 @@ public class AddPlanActivity extends AppCompatActivity {
                 if(edtPlanName.getText().toString().isEmpty()){
                     Toast.makeText(AddPlanActivity.this, "Give the plant a name!", Toast.LENGTH_SHORT).show();
                 }else {
-                    DBHelper.getInstance(AddPlanActivity.this).addPlan(edtPlanName.getText().toString(), null, edtPlanNote.getText().toString());
+                    if(edtPlanNote.getText().toString().isEmpty()){
+                        DBHelper.getInstance(AddPlanActivity.this).addPlan(edtPlanName.getText().toString(), "", "");
+                    }else {
+                        DBHelper.getInstance(AddPlanActivity.this).addPlan(edtPlanName.getText().toString(), "", edtPlanNote.getText().toString());
+                    }
                     if (reminds != null) {
-                        int plantID = DBHelper.getInstance(AddPlanActivity.this).getLastPlanID();
+                        String plantID = DBHelper.getInstance(AddPlanActivity.this).getLastPlanID();
                         for (int i = 0; i < reminds.size(); i++) {
                             Remind remind = reminds.get(i);
-                            DBHelper.getInstance(AddPlanActivity.this).addRemind(String.valueOf(plantID), remind.getRemindType(), remind.getRemindDate(), remind.getRemindTime(), remind.getCareCycle());
+                            DBHelper.getInstance(AddPlanActivity.this).addRemind(plantID, remind.getRemindType(), remind.getRemindDate(), remind.getRemindTime(), remind.getCareCycle());
                         }
                         reminds.clear();
                     }
+                    Intent returnIntent = new Intent();
+                    setResult(Activity.RESULT_CANCELED,returnIntent);
+                    finish();
                 }
             }
         });

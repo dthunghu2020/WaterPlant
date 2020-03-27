@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -33,12 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*DBHelper.getInstance(this).addPlan("Name",null,"abc");
-        DBHelper.getInstance(this).addRemind(String.valueOf(DBHelper.getInstance(this).getLastPlanID()),getBaseContext().getString(R.string.water),"27-03-2020 16:05","5");
-        DBHelper.getInstance(this).addRemind(String.valueOf(DBHelper.getInstance(this).getLastPlanID()),getBaseContext().getString(R.string.fertilize),"27-03-2020 16:05","45");
-        List<Remind> reminds = new ArrayList<>();
-        reminds.add(new Remind("1",getBaseContext().getString(R.string.water),"27-03-2020 16:05","5"));
-        plants.add(new Plant("1",null,"name","note",reminds));*/
+
 
         initView();
 
@@ -96,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_ADD_PLANT){
+            //DBHelper.getInstance(this).getLastPlant();
+        }
     }
 
     private void initView() {

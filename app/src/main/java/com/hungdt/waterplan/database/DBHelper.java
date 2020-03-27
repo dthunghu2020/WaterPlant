@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.hungdt.waterplan.model.Plant;
 import com.hungdt.waterplan.model.Remind;
@@ -70,6 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void updatePlan(String planID, String planName, String planAvatar, String planNote) {
+
         SQLiteDatabase db = instance.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -135,14 +137,14 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int getLastPlanID() {
+    public String getLastPlanID() {
         SQLiteDatabase db = instance.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery(String.format("SELECT * FROM '%s';", TABLE_PLANT), null);
-
-        cursor.moveToLast();
-        int lastID = cursor.getColumnIndex(COLUMN_PLANT_ID);
-
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_PLANT+" ORDER BY "+COLUMN_PLANT_ID+" DESC LIMIT 1",null);
+        String lastID = "";
+        while (cursor.moveToNext()) {
+            lastID = cursor.getString(0);
+        }
         cursor.close();
         db.close();
 
@@ -167,7 +169,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         db.close();
-
         return plants;
     }
 
@@ -195,6 +196,24 @@ public class DBHelper extends SQLiteOpenHelper {
         return reminds;
     }
 
+    public Plant getLastPlant() {
+        SQLiteDatabase db = instance.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(String.format("SELECT * FROM '%s';", TABLE_PLANT), null);
+        cursor.moveToLast();
+
+        String plantID = cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_ID));
+        String plantName = cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_ID));
+        String plantImage = cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_ID));
+        String plantNote = cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_ID));
+        List<Remind> reminds = getAllPlantRemind(plantID);
+        Plant plant = new Plant(plantID, plantImage, plantName, plantNote, reminds);
+
+        cursor.close();
+        db.close();
+
+        return plant;
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TABLE_PLAN);
@@ -208,5 +227,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
 
 }
