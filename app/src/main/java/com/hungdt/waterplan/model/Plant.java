@@ -1,13 +1,15 @@
 package com.hungdt.waterplan.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Plant {
+public class Plant implements Serializable {
     private String plantID;
     private String plantImage;
     private String plantName;
     private String plantNote;
     private List<Remind> reminds;
+    private boolean isTicked = false;
 
     public Plant(String plantID, String plantImage, String plantName, String plantNote, List<Remind> reminds) {
         this.plantID = plantID;
@@ -55,5 +57,13 @@ public class Plant {
 
     public void setReminds(List<Remind> reminds) {
         this.reminds = reminds;
+    }
+
+    public boolean isTicked() {
+        return isTicked;
+    }
+
+    public void setTicked(boolean ticked) {
+        isTicked = ticked;
     }
 }

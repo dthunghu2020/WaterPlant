@@ -1,6 +1,8 @@
 package com.hungdt.waterplan.model;
 
-public class Remind {
+import java.io.Serializable;
+
+public class Remind implements Serializable {
     private String remindID;
     private String remindType;
     private String remindDate;

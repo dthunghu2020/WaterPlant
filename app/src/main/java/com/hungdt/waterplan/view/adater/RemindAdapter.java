@@ -57,12 +57,12 @@ public class RemindAdapter extends RecyclerView.Adapter<RemindAdapter.RemindHold
             holder.txtTime.setBackgroundColor(layoutInflater.getContext().getResources().getColor(R.color.colorFertilizer));
             holder.imgTypeOfCare.setImageDrawable(layoutInflater.getContext().getResources().getDrawable(R.drawable.ic_fertilizer));
         }else if (remind.getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.spray))){
-            holder.llDate.setBackgroundColor(layoutInflater.getContext().getResources().getColor(R.color.colorSpray));
-            holder.txtTime.setBackgroundColor(layoutInflater.getContext().getResources().getColor(R.color.colorSpray));
-            holder.imgTypeOfCare.setImageDrawable(layoutInflater.getContext().getResources().getDrawable(R.drawable.ic_spray));
-        }else if (remind.getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.prune))){
             holder.llDate.setBackgroundColor(layoutInflater.getContext().getResources().getColor(R.color.colorPrune));
             holder.txtTime.setBackgroundColor(layoutInflater.getContext().getResources().getColor(R.color.colorPrune));
+            holder.imgTypeOfCare.setImageDrawable(layoutInflater.getContext().getResources().getDrawable(R.drawable.ic_spray));
+        }else if (remind.getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.prune))){
+            holder.llDate.setBackgroundColor(layoutInflater.getContext().getResources().getColor(R.color.colorSpray));
+            holder.txtTime.setBackgroundColor(layoutInflater.getContext().getResources().getColor(R.color.colorSpray));
             holder.imgTypeOfCare.setImageDrawable(layoutInflater.getContext().getResources().getDrawable(R.drawable.ic_prune));
         }
 
