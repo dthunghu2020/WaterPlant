@@ -72,7 +72,7 @@
             android:layout_margin="@dimen/_5sdp"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp"
-            android:background="#84A9AC"
+            android:background="#7F78D2"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -95,7 +95,7 @@
             android:id="@+id/llPrune"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp"
-            android:background="#7F78D2"
+            android:background="#84A9AC"
             android:gravity="center"
             android:orientation="vertical">
 

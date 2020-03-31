@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -13,9 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -64,7 +61,7 @@ public class AddPlanActivity extends AppCompatActivity {
     private TextView txtSave;
     private EditText edtPlanName, edtPlanNote;
     private RecyclerView rcvListCareSchedule;
-    private LinearLayout addCareSchedule;
+    private LinearLayout addRemind;
 
     private RemindAdapter remindAdapter;
 
@@ -102,13 +99,12 @@ public class AddPlanActivity extends AppCompatActivity {
         } else if (type.equals(KEY.TYPE_EDIT)) {
             plant = (Plant) intent.getSerializableExtra(KEY.PLANT);
             if (plant != null) {
-                saveRemind = plant.getReminds();
-                reminds = saveRemind;
+                saveRemind.addAll(plant.getReminds());
+                reminds.addAll(plant.getReminds());
                 edtPlanName.setText(plant.getPlantName());
                 edtPlanNote.setText(plant.getPlantNote());
                 if (!plant.getPlantImage().equals("")) {
                     currentPhotoPath = plant.getPlantImage();
-                    Log.e("qkldhfylayhthty", "   opajsdp");
                     Glide
                             .with(this)
                             .load(plant.getPlantImage())
@@ -168,7 +164,7 @@ public class AddPlanActivity extends AppCompatActivity {
                             String plantID = DBHelper.getInstance(AddPlanActivity.this).getLastPlanID();
                             for (int i = 0; i < reminds.size(); i++) {
                                 Remind remind = reminds.get(i);
-                                DBHelper.getInstance(AddPlanActivity.this).addRemind(plantID, remind.getRemindType(), remind.getRemindDate(), remind.getRemindTime(), remind.getCareCycle());
+                                DBHelper.getInstance(AddPlanActivity.this).addRemind(plantID, remind.getRemindType(), remind.getRemindCreateDT(),remind.getRemindTime(), remind.getCareCycle());
                             }
                             reminds.clear();
                         }
@@ -187,27 +183,55 @@ public class AddPlanActivity extends AppCompatActivity {
                             DBHelper.getInstance(AddPlanActivity.this).deletePlanRemind(plant.getPlantID());
                         }
                         //chưa clear list! trong database ok!
-                        if (reminds.size() > 0) {
-                            for (int i = 0; i < reminds.size(); i++) {
-                                if (saveRemind.size() > 0) {
+                        else {
+                            if (saveRemind.size() == 0) {
+                                for (int i = 0; i < reminds.size(); i++) {
+                                    DBHelper.getInstance(AddPlanActivity.this)
+                                            .addRemind(plant.getPlantID(),
+                                                    reminds.get(i).getRemindType(),
+                                                    reminds.get(i).getRemindCreateDT(),
+                                                    reminds.get(i).getRemindTime(),
+                                                    reminds.get(i).getCareCycle());
+                                }
+                            } else {
+                                List<String> idSave = new ArrayList<>();
+                                for (int i = 0; i < saveRemind.size(); i++) {
+                                    idSave.add(saveRemind.get(i).getRemindID());
+                                }
+
+                                for (int i = 0; i < reminds.size(); i++) {
+                                    boolean check = true;
                                     for (int j = 0; j < saveRemind.size(); j++) {
-                                        //nếu trùng type thì update
                                         if (reminds.get(i).getRemindType().equals(saveRemind.get(j).getRemindType())) {
+                                            //nếu trùng thì update
                                             DBHelper.getInstance(AddPlanActivity.this)
                                                     .updateRemind(reminds.get(i).getRemindID(),
-                                                            reminds.get(i).getRemindDate(),
+                                                            reminds.get(i).getRemindCreateDT(),
                                                             reminds.get(i).getRemindTime(),
                                                             reminds.get(i).getCareCycle());
+                                            String id = saveRemind.get(j).getRemindID();
+                                            idSave.remove(id);
+                                            check = false;
                                         }
                                     }
+                                    if (check) {
+                                        // khác thì add
+                                        DBHelper.getInstance(AddPlanActivity.this)
+                                                .addRemind(plant.getPlantID(),
+                                                        reminds.get(i).getRemindType(),
+                                                        reminds.get(i).getRemindCreateDT(),
+                                                        reminds.get(i).getRemindTime(),
+                                                        reminds.get(i).getCareCycle());
+                                    }
                                 }
-                                DBHelper.getInstance(AddPlanActivity.this)
-                                        .addRemind(plant.getPlantID(),
-                                                reminds.get(i).getRemindType(),
-                                                reminds.get(i).getRemindDate(),
-                                                reminds.get(i).getRemindTime(),
-                                                reminds.get(i).getCareCycle());
+                                if (idSave.size() > 0) {
+                                    //xóa bỏ nếu đã xóa khỏi danh sách
+                                    for (int i = 0; i < idSave.size(); i++) {
+                                        DBHelper.getInstance(AddPlanActivity.this).deleteOneRemind(idSave.get(i));
+                                    }
+                                }
                             }
+                            saveRemind.clear();
                             reminds.clear();
                         }
                         Intent resultIntent = new Intent();
@@ -236,7 +260,7 @@ public class AddPlanActivity extends AppCompatActivity {
             }
         });
 
-        addCareSchedule.setOnClickListener(new View.OnClickListener() {
+        addRemind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openChoseTypeDialog();
@@ -251,12 +275,10 @@ public class AddPlanActivity extends AppCompatActivity {
 
             @Override
             public void OnItemDeleteClicked(int position) {
-                Log.e("asdasdas", "  " + checkRemind);
                 checkRemind.add(reminds.get(position).getRemindType());
                 reminds.remove(position);
                 remindAdapter.notifyDataSetChanged();
-                addCareSchedule.setVisibility(View.VISIBLE);
-                Log.e("asdasdas", "  " + checkRemind);
+                addRemind.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -312,7 +334,6 @@ public class AddPlanActivity extends AppCompatActivity {
 
         if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-
                 Uri uri = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
@@ -427,9 +448,9 @@ public class AddPlanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 checkRemind.remove(dialog.getContext().getResources().getString(R.string.water));
                 if (checkRemind.size() == 0) {
-                    addCareSchedule.setVisibility(View.GONE);
+                    addRemind.setVisibility(View.GONE);
                 }
-                reminds.add(new Remind("0", dialog.getContext().getResources().getString(R.string.water), getInstantDay(), "07:00", "5"));
+                reminds.add(new Remind("0", dialog.getContext().getResources().getString(R.string.water), getInstantDateTime(),"07:00","5"));
                 remindAdapter.notifyDataSetChanged();
                 dialog.dismiss();
 
@@ -441,9 +462,9 @@ public class AddPlanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 checkRemind.remove(dialog.getContext().getResources().getString(R.string.fertilize));
                 if (checkRemind.size() == 0) {
-                    addCareSchedule.setVisibility(View.GONE);
+                    addRemind.setVisibility(View.GONE);
                 }
-                reminds.add(new Remind("1", dialog.getContext().getResources().getString(R.string.fertilize), getInstantDay(), "07:00", "5"));
+                reminds.add(new Remind("1", dialog.getContext().getResources().getString(R.string.fertilize), getInstantDateTime(),"07:00", "5"));
                 remindAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
@@ -454,9 +475,9 @@ public class AddPlanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 checkRemind.remove(dialog.getContext().getResources().getString(R.string.spray));
                 if (checkRemind.size() == 0) {
-                    addCareSchedule.setVisibility(View.GONE);
+                    addRemind.setVisibility(View.GONE);
                 }
-                reminds.add(new Remind("2", dialog.getContext().getResources().getString(R.string.spray), getInstantDay(), "07:00", "5"));
+                reminds.add(new Remind("2", dialog.getContext().getResources().getString(R.string.spray), getInstantDateTime(),"07:00", "5"));
                 remindAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
@@ -467,9 +488,9 @@ public class AddPlanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 checkRemind.remove(dialog.getContext().getResources().getString(R.string.prune));
                 if (checkRemind.size() == 0) {
-                    addCareSchedule.setVisibility(View.GONE);
+                    addRemind.setVisibility(View.GONE);
                 }
-                reminds.add(new Remind("3", dialog.getContext().getResources().getString(R.string.prune), getInstantDay(), "07:00", "5"));
+                reminds.add(new Remind("3", dialog.getContext().getResources().getString(R.string.prune), getInstantDateTime(),"07:00", "5"));
                 remindAdapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
@@ -511,7 +532,7 @@ public class AddPlanActivity extends AppCompatActivity {
                 if (Objects.requireNonNull(edtRemindDay.getText()).toString().isEmpty() || Objects.requireNonNull(edtRemindTime.getText()).toString().isEmpty()) {
                     Toast.makeText(AddPlanActivity.this, "Please enter all title!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Remind remindEdited = new Remind(remind.getRemindID(), remind.getRemindType(), remind.getRemindDate(), edtRemindTime.getText().toString(), edtRemindDay.getText().toString());
+                    Remind remindEdited = new Remind(remind.getRemindID(), remind.getRemindType(), remind.getRemindCreateDT(), edtRemindTime.getText().toString(), edtRemindDay.getText().toString());
                     reminds.set(position, remindEdited);
                     remindAdapter.notifyItemChanged(position);
                     dialog.dismiss();
@@ -550,8 +571,8 @@ public class AddPlanActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    private String getInstantDay() {
-        SimpleDateFormat sdf = new SimpleDateFormat(Constant.getDateFormat(), Locale.US);
+    private String getInstantDateTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat(Constant.getDateTimeFormat(), Locale.US);
         return sdf.format(calendar.getTime());
     }
 
@@ -565,6 +586,6 @@ public class AddPlanActivity extends AppCompatActivity {
         edtPlanName = findViewById(R.id.edtPlanName);
         edtPlanNote = findViewById(R.id.edtPlanNote);
         rcvListCareSchedule = findViewById(R.id.rcvListCareSchedule);
-        addCareSchedule = findViewById(R.id.addCareSchedule);
+        addRemind = findViewById(R.id.addCareSchedule);
     }
 }

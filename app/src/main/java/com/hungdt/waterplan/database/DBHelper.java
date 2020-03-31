@@ -30,8 +30,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_REMIND_PLANT_ID = "PLANT_ID";
     public static final String COLUMN_REMIND_ID = "REMIND_ID";
     public static final String COLUMN_REMIND_TYPE = "REMIND_TYPE";
-    public static final String COLUMN_REMIND_DATE = "REMIND_DATE_DATE";
-    public static final String COLUMN_REMIND_TIME = "REMIND_DATE_TIME";
+    public static final String COLUMN_REMIND_CREATE_DATE_TIME = "REMIND_CREATE_DATE_TIME";
+    public static final String COLUMN_REMIND_TIME = "REMIND_TIME";
     public static final String COLUMN_REMIND_CARE_CYCLE = "REMIND_CARE_CYCLE";
 
     public static final String SQL_CREATE_TABLE_PLAN = "CREATE TABLE " + TABLE_PLANT + "("
@@ -44,7 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + COLUMN_REMIND_PLANT_ID + " INTEGER NOT NULL, "
             + COLUMN_REMIND_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_REMIND_TYPE + " TEXT NOT NULL, "
-            + COLUMN_REMIND_DATE + " TEXT NOT NULL, "
+            + COLUMN_REMIND_CREATE_DATE_TIME + " TEXT NOT NULL, "
             + COLUMN_REMIND_TIME + " TEXT NOT NULL, "
             + COLUMN_REMIND_CARE_CYCLE + " TEXT NOT NULL" + ");";
 
@@ -93,28 +93,37 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addRemind(String planID, String remindType, String remindDate, String remindTime, String careCycle) {
+    public void addRemind(String planID, String remindType, String remindCreateDateTime, String remindTime, String careCycle) {
         SQLiteDatabase database = instance.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_REMIND_PLANT_ID, planID);
         values.put(COLUMN_REMIND_TYPE, remindType);
-        values.put(COLUMN_REMIND_DATE, remindDate);
+        values.put(COLUMN_REMIND_CREATE_DATE_TIME, remindCreateDateTime);
         values.put(COLUMN_REMIND_TIME, remindTime);
         values.put(COLUMN_REMIND_CARE_CYCLE, careCycle);
         database.insert(TABLE_REMIND, null, values);
         database.close();
     }
 
-    public void updateRemind(String remindID, String remindDate, String remindTime, String careCycle) {
+    public void updateRemind(String remindID, String remindCreateDateTime, String remindTime, String careCycle) {
         SQLiteDatabase db = instance.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_REMIND_DATE, remindDate);
+        values.put(COLUMN_REMIND_CREATE_DATE_TIME, remindCreateDateTime);
         values.put(COLUMN_REMIND_TIME, remindTime);
         values.put(COLUMN_REMIND_CARE_CYCLE, careCycle);
         db.update(TABLE_REMIND, values, COLUMN_REMIND_ID + "='" + remindID + "'", null);
         db.close();
+    }
+
+    public void refreshRemind(String plantID, String dateTime, String type) {
+        //todo
+        SQLiteDatabase db = instance.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_REMIND_CREATE_DATE_TIME, dateTime);
+        db.update(TABLE_REMIND, values, COLUMN_REMIND_PLANT_ID + "='" + plantID + "' AND " + COLUMN_REMIND_TYPE + "='" + type + "'", null);
     }
 
     public void deleteOneRemind(String remindID) {
@@ -204,10 +213,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 if (cursor.getString(cursor.getColumnIndex(COLUMN_REMIND_PLANT_ID)).equals(plantID)) {
                     String remindID = cursor.getString(cursor.getColumnIndex(COLUMN_REMIND_ID));
                     String remindType = cursor.getString(cursor.getColumnIndex(COLUMN_REMIND_TYPE));
-                    String remindDate = cursor.getString(cursor.getColumnIndex(COLUMN_REMIND_DATE));
+                    String remindCreateDateTime = cursor.getString(cursor.getColumnIndex(COLUMN_REMIND_CREATE_DATE_TIME));
                     String remindTime = cursor.getString(cursor.getColumnIndex(COLUMN_REMIND_TIME));
                     String careCycle = cursor.getString(cursor.getColumnIndex(COLUMN_REMIND_CARE_CYCLE));
-                    reminds.add(new Remind(remindID, remindType, remindDate, remindTime, careCycle));
+                    reminds.add(new Remind(remindID, remindType, remindCreateDateTime, remindTime, careCycle));
                 }
                 cursor.moveToNext();
             }
@@ -239,6 +248,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return plant;
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TABLE_PLAN);
@@ -252,5 +262,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         onCreate(db);
     }
+
 
 }

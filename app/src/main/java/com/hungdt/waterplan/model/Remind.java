@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class Remind implements Serializable {
     private String remindID;
     private String remindType;
-    private String remindDate;
+    private String remindCreateDT;
     private String remindTime;
     private String careCycle;
 
-    public Remind(String remindID, String remindType, String remindDate, String remindTime, String careCycle) {
+    public Remind(String remindID, String remindType, String remindCreateDT, String remindTime, String careCycle) {
         this.remindID = remindID;
         this.remindType = remindType;
-        this.remindDate = remindDate;
+        this.remindCreateDT = remindCreateDT;
         this.remindTime = remindTime;
         this.careCycle = careCycle;
     }
@@ -33,12 +33,12 @@ public class Remind implements Serializable {
         this.remindType = remindType;
     }
 
-    public String getRemindDate() {
-        return remindDate;
+    public String getRemindCreateDT() {
+        return remindCreateDT;
     }
 
-    public void setRemindDate(String remindDate) {
-        this.remindDate = remindDate;
+    public void setRemindCreateDT(String remindCreateDT) {
+        this.remindCreateDT = remindCreateDT;
     }
 
     public String getRemindTime() {

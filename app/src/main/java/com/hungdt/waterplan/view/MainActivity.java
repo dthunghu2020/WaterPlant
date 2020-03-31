@@ -15,11 +15,15 @@ import android.widget.ImageView;
 import com.hungdt.waterplan.KEY;
 import com.hungdt.waterplan.R;
 import com.hungdt.waterplan.database.DBHelper;
+import com.hungdt.waterplan.dataset.Constant;
 import com.hungdt.waterplan.model.Plant;
 import com.hungdt.waterplan.view.adater.PlantAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,9 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
     private int positionSave;
     private String typeOfCare = KEY.TYPE_CREATE;
+    final Calendar calendar = Calendar.getInstance();
 
     private List<Plant> plants = new ArrayList<>();
-    private List<String> cbPlantId = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +70,41 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, AddPlanActivity.class);
                     intent.putExtra(KEY.TYPE, KEY.TYPE_CREATE);
                     startActivityForResult(intent, REQUEST_CODE_ADD_PLANT);
-                }
-                if (typeOfCare.equals(KEY.TYPE_WATER)) {
-                    //for thay đổi dữ liệu care, cập nhật lại check trong plants.
-                    for (int i = 0; i < plants.size(); i++) {
-                        if (plants.get(i).isTicked()) {
-                            //todo cập nhật lại careCircle
-                            plants.get(i).setTicked(!plants.get(i).isTicked());
+                }else {
+                    if (typeOfCare.equals(KEY.TYPE_WATER)) {
+                        //for thay đổi dữ liệu care, cập nhật lại check trong plants.
+                        for (int i = 0; i < plants.size(); i++) {
+                            if (plants.get(i).isTicked()) {
+                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(),getInstantDateTime(),KEY.TYPE_WATER);
+                                plants.get(i).setTicked(!plants.get(i).isTicked());
+                            }
+                        }
+                    }
+                    if (typeOfCare.equals(KEY.TYPE_FERTILIZER)) {
+                        //for thay đổi dữ liệu care, cập nhật lại check trong plants.
+                        for (int i = 0; i < plants.size(); i++) {
+                            if (plants.get(i).isTicked()) {
+                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(),getInstantDateTime(),KEY.TYPE_FERTILIZER);
+                                plants.get(i).setTicked(!plants.get(i).isTicked());
+                            }
+                        }
+                    }
+                    if (typeOfCare.equals(KEY.TYPE_SPRAY)) {
+                        //for thay đổi dữ liệu care, cập nhật lại check trong plants.
+                        for (int i = 0; i < plants.size(); i++) {
+                            if (plants.get(i).isTicked()) {
+                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(),getInstantDateTime(),KEY.TYPE_SPRAY);
+                                plants.get(i).setTicked(!plants.get(i).isTicked());
+                            }
+                        }
+                    }
+                    if (typeOfCare.equals(KEY.TYPE_PRUNE)) {
+                        //for thay đổi dữ liệu care, cập nhật lại check trong plants.
+                        for (int i = 0; i < plants.size(); i++) {
+                            if (plants.get(i).isTicked()) {
+                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(),getInstantDateTime(),KEY.TYPE_PRUNE);
+                                plants.get(i).setTicked(!plants.get(i).isTicked());
+                            }
                         }
                     }
                     imgPlus.setImageDrawable(getDrawable(R.drawable.ic_plus));
@@ -80,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     plantAdapter.disableCheckBox();
                     plantAdapter.notifyDataSetChanged();
                 }
+
             }
         });
 
@@ -97,21 +131,33 @@ public class MainActivity extends AppCompatActivity {
         imgFertilizer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo
+                typeOfCare = KEY.TYPE_FERTILIZER;
+                invisibleViewCare();
+                imgPlus.setImageDrawable(getDrawable(R.drawable.ic_fertilizer));
+                plantAdapter.enableCheckBox();
+                plantAdapter.notifyDataSetChanged();
             }
         });
 
         imgPrune.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo
+                typeOfCare = KEY.TYPE_PRUNE;
+                invisibleViewCare();
+                imgPlus.setImageDrawable(getDrawable(R.drawable.ic_prune));
+                plantAdapter.enableCheckBox();
+                plantAdapter.notifyDataSetChanged();
             }
         });
 
         imgSpray.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo
+                typeOfCare = KEY.TYPE_SPRAY;
+                invisibleViewCare();
+                imgPlus.setImageDrawable(getDrawable(R.drawable.ic_spray));
+                plantAdapter.enableCheckBox();
+                plantAdapter.notifyDataSetChanged();
             }
         });
 
@@ -202,6 +248,11 @@ public class MainActivity extends AppCompatActivity {
                 plants.get(i).setTicked(!plants.get(i).isTicked());
             }
         }
+    }
+
+    private String getInstantDateTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat(Constant.getDateTimeFormat(), Locale.US);
+        return sdf.format(calendar.getTime());
     }
 
     private void initView() {
