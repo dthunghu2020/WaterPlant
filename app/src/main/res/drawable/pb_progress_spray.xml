@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@android:id/background"
+        android:bottom="0dp"
+        android:drawable="@drawable/pb_bg_spray_fill"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp" />
+    <item
+        android:id="@android:id/progress"
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp">
+        <clip android:drawable="@drawable/pb_progress_fill_spray" />
+    </item>
+
+</layer-list>

@@ -1,127 +1,535 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:id="@+id/llItem"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_2sdp"
-    android:orientation="horizontal">
-    <CheckBox
-        android:id="@+id/cbPlant"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_height="wrap_content"/>
-    <ImageView
-        android:id="@+id/imgPlantAvatar"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_gravity="center_vertical"
-        android:scaleType="centerCrop"
-        android:src="@drawable/tree_default" />
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/llItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/_3sdp">
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp">
 
-        <TextView
-            android:id="@+id/txtPlanName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Plan Name"
-            android:textSize="25sp" />
+        <CheckBox
+            android:id="@+id/cbPlant"
+            android:layout_width="@dimen/_21sdp"
+            android:layout_height="@dimen/_21sdp"
+            android:layout_gravity="center_vertical" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgPlantAvatar"
+            android:layout_width="@dimen/_56sdp"
+            android:layout_height="@dimen/_56sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ava_default_tree"
+            app:riv_corner_radius="@dimen/_12sdp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:weightSum="4">
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="@dimen/_3sdp">
+
+            <TextView
+                android:id="@+id/txtPlanName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_5sdp"
+                android:text="Plan Name"
+                android:textColor="@color/black_2"
+                android:textSize="18sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_6sdp">
+                <LinearLayout
+                    android:id="@+id/LLShow"
+                    android:layout_width="match_parent"
+                    android:weightSum="4"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clWater"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/pbWater"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/pb_progress_water" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_1sdp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:src="@drawable/ic_watering" />
+
+                            <TextView
+                                android:id="@+id/txtWater"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:gravity="center_vertical"
+                                android:text="888 days"
+                                android:textColor="@color/white"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clFertilizer"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/pbFertilizer"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/pb_progress_fertilizer" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_1sdp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:src="@drawable/ic_fertilize" />
+
+
+                            <TextView
+                                android:id="@+id/txtFertilizer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:gravity="center_vertical"
+                                android:text="88 days"
+                                android:textColor="@color/white"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clPrune"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/pbPrune"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/pb_progress_prune" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_1sdp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:src="@drawable/ic_prune" />
+
+                            <TextView
+                                android:id="@+id/txtPrune"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:gravity="center_vertical"
+                                android:text="88 days"
+                                android:textColor="@color/white"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clSpray"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/pbSpray"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/pb_progress_spray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_1sdp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:src="@drawable/ic_spray" />
+
+                            <TextView
+                                android:id="@+id/txtSpray"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:gravity="center_vertical"
+                                android:text="88 days"
+                                android:textColor="@color/white"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/LLCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clWaterCB"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/pbWaterCB"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/pb_progress_water" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_2sdp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="@dimen/_16sdp"
+                                android:src="@drawable/ic_watering" />
+
+                            <TextView
+                                android:id="@+id/txtWaterCB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:gravity="center_vertical"
+                                android:text="888 days"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clFertilizerCB"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/pbFertilizerCB"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/pb_progress_fertilizer" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_1sdp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="@dimen/_16sdp"
+                                android:src="@drawable/ic_fertilize" />
+
+
+                            <TextView
+                                android:id="@+id/txtFertilizerCB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:gravity="center_vertical"
+                                android:text="88 days"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clPruneCB"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/pbPruneCB"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/pb_progress_prune" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_1sdp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="@dimen/_16sdp"
+                                android:src="@drawable/ic_prune" />
+
+                            <TextView
+                                android:id="@+id/txtPruneCB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:gravity="center_vertical"
+                                android:text="88 days"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/clSprayCB"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
+
+                        <ProgressBar
+                            android:id="@+id/pbSprayCB"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/pb_progress_spray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:padding="@dimen/_1sdp"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="@dimen/_16sdp"
+                                android:src="@drawable/ic_spray" />
+
+                            <TextView
+                                android:id="@+id/txtSprayCB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_marginStart="@dimen/_1sdp"
+                                android:gravity="center_vertical"
+                                android:text="88 days"
+                                android:textColor="@color/white"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </FrameLayout>
+
+
+            <ImageView
+                android:id="@+id/lineEvent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="@color/line_gray" />
 
             <LinearLayout
-                android:id="@+id/llWater"
-                android:layout_width="0dp"
+                android:id="@+id/eventView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#A674E3F1"
-                android:gravity="center">
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center_vertical"
+                android:padding="@dimen/_5sdp">
 
                 <ImageView
+                    android:id="@+id/imgFlag"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
-                    android:src="@drawable/ic_water" />
+                    android:background="@drawable/ic_event" />
 
-                <TextView
-                    android:id="@+id/txtWater"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:text="88 days" />
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/llFertilizer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#A67D5E2A"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:src="@drawable/ic_fertilizer" />
+                    <LinearLayout
+                        android:id="@+id/event1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
 
-                <TextView
-                    android:id="@+id/txtFertilizer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:text="88 days" />
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/txtEventDay1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="09/04/2020"
+                            android:textSize="11sp" />
 
-            <LinearLayout
-                android:id="@+id/llPrune"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#A684A9AC"
-                android:gravity="center">
+                        <ImageView
+                            android:layout_width="1sp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:background="@color/line_gray" />
 
-                <ImageView
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:src="@drawable/ic_prune" />
+                        <TextView
+                            android:id="@+id/txtEvent1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Wedding, cultivation"
+                            android:textSize="11sp" />
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txtPrune"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:text="88 days" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/event2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/llSpray"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#A67F78D2"
-                android:gravity="center">
+                        <TextView
+                            android:id="@+id/txtEventDay2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="09/04/2020"
+                            android:textSize="11sp" />
 
-                <ImageView
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:src="@drawable/ic_spray" />
+                        <ImageView
+                            android:layout_width="1sp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:background="@color/line_gray" />
 
-                <TextView
-                    android:id="@+id/txtSpray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:text="88 days" />
+                        <TextView
+                            android:id="@+id/txtEvent2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Wedding, cultivation"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/event3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtEventDay3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="09/04/2020"
+                            android:textSize="11sp" />
+
+                        <ImageView
+                            android:layout_width="1sp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginEnd="@dimen/_8sdp"
+                            android:background="@color/line_gray" />
+
+                        <TextView
+                            android:id="@+id/txtEvent3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Wedding, cultivation"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/line_gray" />
 </LinearLayout>

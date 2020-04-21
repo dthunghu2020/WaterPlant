@@ -4,7 +4,6 @@ public interface KEY {
     String PLANT = "plant";
     String TYPE_CREATE = "type create";
     String TYPE_EDIT = "edit";
-    String TYPE_LOAD_ADAPTER = "load adapter";
     String TYPE_WATER = "water";
     String TYPE_FERTILIZER = "fertilizer";
     String TYPE_SPRAY = "spray";
@@ -14,5 +13,5 @@ public interface KEY {
     String DELETE = "delete";
     String UPDATE = "update";
     String CREATE = "create";
-    String TYPE_TICK_BOX = "tick box";
+    String KEY_TASK_DESC = "key_task_desc";
 }

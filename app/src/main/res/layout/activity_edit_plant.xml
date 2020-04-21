@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:padding="@dimen/_3sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_x" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_toEndOf="@id/imgBack"
+            android:text="Add Plant"
+            android:textColor="@color/black_2"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/green"
+            app:cardCornerRadius="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="Save"
+                android:textColor="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/imgDeletePlant"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_toStartOf="@id/btnSave"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/ic_delete" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/llBanner"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/avatar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imgPlantAvatar"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/capture_photo_plus"
+                    app:layout_constraintEnd_toStartOf="@id/txtTutorial"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/txtTutorial"
+                    android:layout_width="@dimen/_160sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/shape_conner_tutorial"
+                    android:gravity="center"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Add a picture first so that we can recognise your plant and complete detail"
+                    android:textColor="@color/black_2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtWrapper1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:hintEnabled="true"
+                app:layout_constraintTop_toBottomOf="@+id/avatar">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPlanName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Plan Name" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/txtTitlePeriodic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Periodic Care"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtWrapper1" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/WaterRM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/txtTitlePeriodic">
+
+                <LinearLayout
+                    android:id="@+id/llWaterRemind"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toStartOf="@id/swWater"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iconWater"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:background="@drawable/ic_watering"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Watering"
+                            android:textColor="@color/black_2"
+                            android:textSize="@dimen/_16sdp" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txtDisableWater"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/_2sdp"
+                                android:text="Disable"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:id="@+id/llWater"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:background="@drawable/ic_period_set" />
+
+                                <TextView
+                                    android:id="@+id/txtWaterCircle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="Every 5 days"
+                                    android:textSize="12sp" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:layout_marginStart="@dimen/_30sdp"
+                                    android:background="@drawable/ic_notitime_set" />
+
+                                <TextView
+                                    android:id="@+id/txtWaterTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="11:00"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </FrameLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/swWater"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:checked="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/PruneRM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/WaterRM">
+
+                <LinearLayout
+                    android:id="@+id/llPruneRemind"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toStartOf="@id/swPrune"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iconPrune"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:background="@drawable/ic_prune"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Prune"
+                            android:textColor="@color/black_2"
+                            android:textSize="@dimen/_16sdp" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txtDisablePrune"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/_2sdp"
+                                android:text="Disable"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:id="@+id/llPrune"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:background="@drawable/ic_period_set" />
+
+                                <TextView
+                                    android:id="@+id/txtPruneCircle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="Every 5 days"
+                                    android:textSize="12sp" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:layout_marginStart="@dimen/_30sdp"
+                                    android:background="@drawable/ic_notitime_set" />
+
+                                <TextView
+                                    android:id="@+id/txtPruneTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="11:00"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </FrameLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/swPrune"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:checked="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/SprayRM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/PruneRM">
+
+                <LinearLayout
+                    android:id="@+id/llSprayRemind"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toStartOf="@id/swSpray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iconSpray"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:background="@drawable/ic_spray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Spray"
+                            android:textColor="@color/black_2"
+                            android:textSize="@dimen/_16sdp" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txtDisableSpray"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/_2sdp"
+                                android:text="Disable"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:id="@+id/llSpray"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:background="@drawable/ic_period_set" />
+
+                                <TextView
+                                    android:id="@+id/txtSprayCircle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="Every 5 days"
+                                    android:textSize="12sp" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:layout_marginStart="@dimen/_30sdp"
+                                    android:background="@drawable/ic_notitime_set" />
+
+                                <TextView
+                                    android:id="@+id/txtSprayTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="11:00"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </FrameLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/swSpray"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:checked="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/FertilizeRM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/SprayRM">
+
+                <LinearLayout
+                    android:id="@+id/llFertilizeRemind"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toStartOf="@id/swFertilization"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iconFertilize"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:background="@drawable/ic_fertilize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fertilize"
+                            android:textColor="@color/black_2"
+                            android:textSize="@dimen/_16sdp" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txtDisableFertilize"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/_2sdp"
+                                android:text="Disable"
+                                android:textSize="14sp" />
+
+                            <LinearLayout
+                                android:id="@+id/llFertilize"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_3sdp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:background="@drawable/ic_period_set" />
+
+                                <TextView
+                                    android:id="@+id/txtFertilizeCircle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="Every 5 days"
+                                    android:textSize="12sp" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_16sdp"
+                                    android:layout_height="@dimen/_16sdp"
+                                    android:layout_marginStart="@dimen/_30sdp"
+                                    android:background="@drawable/ic_notitime_set" />
+
+                                <TextView
+                                    android:id="@+id/txtFertilizeTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:text="11:00"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </FrameLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/swFertilization"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:checked="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/txtTitleEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="One-off events"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/FertilizeRM" />
+
+            <LinearLayout
+                android:id="@+id/Event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_8sdp"
+                android:weightSum="3"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitleEvent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/event1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/flag1"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@drawable/ic_event"
+                        android:padding="@dimen/_4sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtEvent1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:text="Dust Removal"
+                        android:textColor="@color/black_2"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtEventDay1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:text="04/10/2020"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtEvent1" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:background="@color/line_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/event2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/flag2"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@drawable/ic_event"
+                        android:padding="@dimen/_4sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtEvent2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:text="Dust Removal"
+                        android:textColor="@color/black_2"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtEventDay2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:text="04/10/2020"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtEvent2" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_28sdp"
+                        android:background="@color/line_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/event3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/flag3"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:background="@drawable/ic_event"
+                        android:padding="@dimen/_4sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtEvent3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:text="Dust Removal"
+                        android:textColor="@color/black_2"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtEventDay3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:text="04/10/2020"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtEvent3" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtWrapper2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:hintEnabled="true"
+                app:layout_constraintTop_toBottomOf="@+id/Event">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPlanNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Note" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/llBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

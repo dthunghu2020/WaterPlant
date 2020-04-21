@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="splash_title">Developed by Beldum Studio</string>
+
+    <string name="file_provider">com.icebear.newsdk.share11</string>
+    <string name="firebase_message_id">message_id_firebase</string>
+
+    <string name="ID_PUBLISHER" translatable="false"></string>
+    <string name="BASE64" translatable="false">ABCDE</string>
+    <string name="ID_REMOVE_ADS" translatable="false">.removeads</string>
+    <string name="ID_SUBSCRIPTION" translatable="false">.sub</string>
+    <string name="PLAY_STORE_APP_URL" translatable="false">https://play.google.com/store/apps/details?id=</string>
+    <string name="PLAY_STORE_DEV_URL" translatable="false">http://play.google.com/store/search?q=pub:</string>
+    <string name="PLAY_STORE_DEV_NAME" translatable="false">Beldum Studio</string>
+    <string name="EMAIL_DEVELOPER" translatable="false">beldum.support@gmail.com</string>
+    <string name="LINK_POLICY" translatable="false">https://sites.google.com/site//</string>
+
+    <string name="APP_ID" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="VERSION_CODE" translatable="false">1</string>
+
+    <string name="BANNER_G" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="INTER_G" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="VIDEO_G" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="NATIVE_L_G" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
+
+    <string name="facebook_app_id" translatable="false"></string>
+    <string name="BANNER_FB" translatable="false">YOUR_PLACEMENT_ID</string>
+    <string name="INTER_FB" translatable="false">YOUR_PLACEMENT_ID</string>
+    <string name="INTER_FB_O" translatable="false">YOUR_PLACEMENT_ID</string>
+    <string name="NATIVE_L_FB" translatable="false">YOUR_PLACEMENT_ID</string>
+    <string name="NATIVE_L_FB_O" translatable="false">YOUR_PLACEMENT_ID</string>
+    <string name="NATIVE_BANNER_FB" translatable="false">YOUR_PLACEMENT_ID</string>
+
+
+    <string name="GAME_ID" translatable="false">1234567</string>
+    <string name="INTER_UNI" translatable="false">video</string>
+    <string name="VIDEO_UNI" translatable="false">rewardedVideo</string>
+
+    <string name="INTER_M" translatable="false">/6499/example/interstitial</string>
+    <string name="NATIVE_L_M" translatable="false">/6499/example/native</string>
+    <string name="VIDEO_M" translatable="false">/6499/example/rewarded-video</string>
+
+</resources>

@@ -1,0 +1,179 @@
+<com.google.android.gms.ads.formats.UnifiedNativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/r_layout"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/layout_media"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxHeight="200dp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/appinstall_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:adjustViewBounds="true"
+                                android:maxHeight="200dp" />
+
+                            <com.google.android.gms.ads.formats.MediaView
+                                android:id="@+id/appinstall_media"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_info"
+                        android:minHeight="80dp"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layout_media"
+                        android:layout_gravity="bottom"
+                        android:orientation="vertical"
+                        android:paddingTop="6dp">
+
+                        <LinearLayout
+                            android:layout_gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/appinstall_app_icon"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:adjustViewBounds="true"
+                                android:padding="5dp"
+                                android:visibility="visible" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/appinstall_headline"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:maxLines="2"
+                                    android:text="appinstall headline"
+                                    android:textColor="#EC000000"
+                                    android:textSize="15sp"
+                                    android:textStyle="normal" />
+
+                                <RatingBar
+                                    android:id="@+id/appinstall_stars"
+                                    style="?android:attr/ratingBarStyleSmall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:isIndicator="true"
+                                    android:numStars="5"
+                                    android:stepSize="0.5"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:id="@+id/appinstall_body"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:maxLines="2"
+                                    android:scrollHorizontally="true"
+                                    android:text="appinstall body"
+                                    android:textColor="#C5313131"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/appinstall_call_to_action"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/r_button"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:gravity="center"
+                                android:maxWidth="100dp"
+                                android:text="install"
+                                android:textAllCaps="false"
+                                android:textColor="#fff"
+                                android:textSize="14sp"
+                                android:textStyle="normal" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/appinstall_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="appinstall price"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/appinstall_store"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="appinstall store"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <TextView style="@style/AppTheme.AdAttribution" />
+</com.google.android.gms.ads.formats.UnifiedNativeAdView>

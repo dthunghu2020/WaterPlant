@@ -9,14 +9,16 @@ public class Plant implements Serializable {
     private String plantName;
     private String plantNote;
     private List<Remind> reminds;
+    private List<Event> events;
     private boolean isTicked = false;
 
-    public Plant(String plantID, String plantImage, String plantName, String plantNote, List<Remind> reminds) {
+    public Plant(String plantID, String plantImage, String plantName, String plantNote, List<Remind> reminds,List<Event> events) {
         this.plantID = plantID;
         this.plantImage = plantImage;
         this.plantName = plantName;
         this.plantNote = plantNote;
         this.reminds = reminds;
+        this.events = events;
     }
 
     public String getPlantID() {
@@ -57,6 +59,14 @@ public class Plant implements Serializable {
 
     public void setReminds(List<Remind> reminds) {
         this.reminds = reminds;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public boolean isTicked() {

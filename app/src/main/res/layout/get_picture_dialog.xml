@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_16sdp">
+
+    <LinearLayout
+        android:id="@+id/llCamera"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:background="@drawable/ic_take_picture"
+            android:layout_width="@dimen/_27sdp"
+            android:layout_height="@dimen/_27sdp"/>
+        <TextView
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_width="wrap_content"
+            android:text="Take a picture"
+            android:textColor="@color/black_2"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llGallery"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:background="@drawable/ic_gallery"
+            android:layout_width="@dimen/_27sdp"
+            android:padding="@dimen/_1sdp"
+            android:layout_height="@dimen/_27sdp"/>
+        <TextView
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_width="wrap_content"
+            android:text="Choose from Gallery"
+            android:textColor="@color/black_2"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

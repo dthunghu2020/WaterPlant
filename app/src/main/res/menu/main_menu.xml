@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<group android:checkableBehavior="single">-->
+    <item
+        android:id="@+id/nav_setting"
+        android:title="Setting" />
+
+    <item
+        android:id="@+id/nav_upgradeToVIP"
+        android:title="Upgrade to VIP" />
+    <item
+        android:id="@+id/nav_remove_add"
+        android:title="Remove Ads" />
+    <item
+        android:id="@+id/nav_rate_us"
+        android:title="Rate Us" />
+    <item
+        android:id="@+id/nav_feedback_dev"
+        android:title="Feedback to Developer" />
+    <item
+        android:id="@+id/nav_share"
+        android:title="Share app for your Friend" />
+    <item
+        android:id="@+id/nav_policy"
+        android:title="Privacy Policy" />
+    <!--<group>-->
+</menu>

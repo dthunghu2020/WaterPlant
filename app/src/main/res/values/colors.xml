@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">#65FFF2</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorWater">#BA3AE1F6</color>
-    <color name="colorFertilizer">#9c5518</color>
-    <color name="colorSpray">#84A9AC</color>
-    <color name="colorPrune">#7F78D2</color>
+    <color name="colorWater">#3592F0</color>
+    <color name="colorFertilizer">#FFB41B</color>
+    <color name="colorPrune">#00C77C</color>
+    <color name="colorSpray">#FF6168</color>
+    <color name="colorLightWater">#EBF4FB</color>
+    <color name="colorLightFertilizer">#FFF7EB</color>
+    <color name="colorLightPrune">#D2F9F2</color>
+    <color name="colorLightSpray">#FFEFF2</color>
+    <color name="colorPbWater">#90BFF7</color>
+    <color name="colorPbFertilizer">#FFD281</color>
+    <color name="colorPbPrune">#64EACC</color>
+    <color name="colorPbSpray">#FFA1A6</color>
+    <color name="translucent_3">#2BE101</color>
+    <color name="green">#00C87C</color>
+    <color name="blue_4">#03A9F4</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#F30202</color>
+    <color name="black_2">#020202</color>
+    <color name="gray_2">#3E3E3E</color>
+    <color name="gray">#CCDEE3E2</color>
+    <color name="status_bar">#B31E1E1E</color>
+    <color name="line_gray">#40C6C6C6</color>
+    <color name="dark_blue">#000B63</color>
 </resources>
