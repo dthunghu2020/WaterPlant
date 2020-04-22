@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingBottom="@dimen/_5sdp">
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp">
 
         <CheckBox
             android:id="@+id/cbPlant"
@@ -21,10 +21,10 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imgPlantAvatar"
-            android:layout_width="@dimen/_56sdp"
-            android:layout_height="@dimen/_56sdp"
+            android:layout_width="@dimen/_72sdp"
+            android:layout_height="@dimen/_72sdp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_6sdp"
             android:layout_marginEnd="@dimen/_2sdp"
             android:scaleType="centerCrop"
             android:src="@drawable/ava_default_tree"
@@ -34,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_6sdp"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
 
@@ -48,20 +49,20 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_6sdp">
+
                 <LinearLayout
                     android:id="@+id/LLShow"
                     android:layout_width="match_parent"
-                    android:weightSum="4"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:weightSum="4">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clWater"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/_46sdp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="1">
+                        android:layout_marginEnd="@dimen/_2sdp">
 
                         <ProgressBar
                             android:id="@+id/pbWater"
@@ -92,17 +93,16 @@
                                 android:gravity="center_vertical"
                                 android:text="888 days"
                                 android:textColor="@color/white"
-                                android:textSize="10sp" />
+                                android:textSize="9sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clFertilizer"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/_46sdp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="1">
+                        android:layout_marginEnd="@dimen/_2sdp">
 
                         <ProgressBar
                             android:id="@+id/pbFertilizer"
@@ -134,17 +134,16 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="10sp" />
+                                android:textSize="9sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clPrune"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/_46sdp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="1">
+                        android:layout_marginEnd="@dimen/_2sdp">
 
                         <ProgressBar
                             android:id="@+id/pbPrune"
@@ -175,17 +174,16 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="10sp" />
+                                android:textSize="9sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clSpray"
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/_46sdp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_weight="1">
+                        android:layout_marginEnd="@dimen/_2sdp">
 
                         <ProgressBar
                             android:id="@+id/pbSpray"
@@ -216,12 +214,13 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="10sp" />
+                                android:textSize="9sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/LLCheckBox"
                     android:layout_width="match_parent"
@@ -251,10 +250,10 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_marginStart="@dimen/_15sdp"
-                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:layout_width="@dimen/_16sdp"
                                 android:layout_height="@dimen/_16sdp"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:src="@drawable/ic_watering" />
 
                             <TextView
@@ -265,7 +264,7 @@
                                 android:gravity="center_vertical"
                                 android:text="888 days"
                                 android:textColor="@color/white"
-                                android:textSize="12sp" />
+                                android:textSize="8sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -294,10 +293,10 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_marginStart="@dimen/_15sdp"
-                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:layout_width="@dimen/_16sdp"
                                 android:layout_height="@dimen/_16sdp"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:src="@drawable/ic_fertilize" />
 
 
@@ -309,7 +308,7 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="12sp" />
+                                android:textSize="8sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -338,10 +337,10 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_marginStart="@dimen/_15sdp"
-                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:layout_width="@dimen/_16sdp"
                                 android:layout_height="@dimen/_16sdp"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:src="@drawable/ic_prune" />
 
                             <TextView
@@ -352,7 +351,7 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="12sp" />
+                                android:textSize="8sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -381,10 +380,10 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_marginStart="@dimen/_15sdp"
-                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:layout_width="@dimen/_16sdp"
                                 android:layout_height="@dimen/_16sdp"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:src="@drawable/ic_spray" />
 
                             <TextView
@@ -395,7 +394,7 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="12sp" />
+                                android:textSize="8sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -444,7 +443,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="09/04/2020"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:layout_width="1sp"
@@ -458,7 +457,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wedding, cultivation"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -475,7 +474,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="09/04/2020"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:layout_width="1sp"
@@ -489,7 +488,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wedding, cultivation"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -506,7 +505,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="09/04/2020"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
 
                         <ImageView
                             android:layout_width="1sp"
@@ -520,7 +519,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Wedding, cultivation"
-                            android:textSize="11sp" />
+                            android:textSize="10sp" />
 
                     </LinearLayout>
                 </LinearLayout>

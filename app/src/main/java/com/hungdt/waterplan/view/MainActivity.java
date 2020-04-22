@@ -18,15 +18,21 @@ import androidx.work.WorkManager;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,15 +42,14 @@ import com.google.ads.consent.ConsentInformation;
 import com.google.ads.consent.ConsentStatus;
 import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.formats.NativeAdOptions;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.android.material.navigation.NavigationView;
 import com.hungdt.waterplan.Ads;
 import com.hungdt.waterplan.Helper;
@@ -64,12 +69,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BillingProcessor.IBillingHandler {
     private ConstraintLayout clWater, clFertilizer, clPrune, clSpray;
     private TextView txtUserName, txtNumberWater, txtNumberPrune, txtNumberSpray, txtNumberFertilize, txtPruneNoti, txtWaterNoti, txtFertilizerNoti, txtSprayNoti;
+    private RelativeLayout toolBar;
     private ImageView imgPlus, imgMenu;
     private RecyclerView rcvPlan;
     private PlantAdapter plantAdapter;
@@ -82,14 +89,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int REQUEST_CODE_VIP = 103;
 
     private int positionSave;
+    private int numberOfPlant = 0;
     private int numberWaterNoti = 0;
     private int numberPruneNoti = 0;
     private int numberSprayNoti = 0;
     private int numberFetilizerNoti = 0;
     private String typeOfCare = KEY.TYPE_CREATE;
+
+
     final Calendar calendar = Calendar.getInstance();
 
     private List<Plant> plants = new ArrayList<>();
+
+    private InterstitialAd ggInterstitialAd;
+    private RewardedVideoAd mRewardedVideoAd;
 
     private BillingProcessor bp;
 
@@ -111,6 +124,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        //Inter
+        initGgInterstitialAd();
+
+        //Video
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+            @Override
+            public void onRewarded(RewardItem reward) {
+            }
+
+            @Override
+            public void onRewardedVideoAdLeftApplication() {
+            }
+
+            @Override
+            public void onRewardedVideoAdClosed() {
+                loadRewardedVideoAd();
+            }
+
+            @Override
+            public void onRewardedVideoAdFailedToLoad(int errorCode) {
+            }
+
+            @Override
+            public void onRewardedVideoAdLoaded() {
+            }
+
+            @Override
+            public void onRewardedVideoAdOpened() {
+            }
+
+            @Override
+            public void onRewardedVideoStarted() {
+            }
+
+            @Override
+            public void onRewardedVideoCompleted() {
+                int count = numberOfPlant + 1;
+                DBHelper.getInstance(MainActivity.this).setNumberOfPlant("" + numberOfPlant, "" + count);
+                numberOfPlant += 1;
+            }
+        });
+        loadRewardedVideoAd();
 
         //Native
         int random = new Random().nextInt(100);
@@ -138,8 +194,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         String checkUserData = DBHelper.getInstance(this).getUserName();
         if (checkUserData.isEmpty()) {
-            DBHelper.getInstance(this).createUserData("Planter", "On", "On");
+            DBHelper.getInstance(this).createUserData("Planter", "On", "On", "3");
         }
+        numberOfPlant = Integer.parseInt(DBHelper.getInstance(MainActivity.this).getNumberOfPlant());
+
         //Notification
         Data data = new Data.Builder()
                 .putString(KEY.KEY_TASK_DESC, "Send name plant so show") //có thể put nhiều .putString!!!
@@ -198,60 +256,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMorePlaceDialog();
-                /*
-                if (typeOfCare.equals(KEY.TYPE_CREATE)) {
-                    Intent intent = new Intent(MainActivity.this, EditPlanActivity.class);
-                    intent.putExtra(KEY.TYPE, KEY.TYPE_CREATE);
-                    startActivityForResult(intent, REQUEST_CODE_ADD_PLANT);
-                    setNotiView();
+                if (numberOfPlant == plants.size()) {
+                    openMorePlaceDialog();
                 } else {
-                    if (typeOfCare.equals(KEY.TYPE_WATER)) {
-                        for (int i = 0; i < plants.size(); i++) {
-                            if (plants.get(i).isTicked()) {
-                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_WATER);
-                                plants.get(i).setTicked(!plants.get(i).isTicked());
-                                updateView(i);
-                                setNotiView();
+                    if (typeOfCare.equals(KEY.TYPE_CREATE)) {
+                        Intent intent = new Intent(MainActivity.this, EditPlanActivity.class);
+                        intent.putExtra(KEY.TYPE, KEY.TYPE_CREATE);
+                        startActivityForResult(intent, REQUEST_CODE_ADD_PLANT);
+                        setNotiView();
+                    } else {
+                        if (typeOfCare.equals(KEY.TYPE_WATER)) {
+                            for (int i = 0; i < plants.size(); i++) {
+                                if (plants.get(i).isTicked()) {
+                                    DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_WATER);
+                                    plants.get(i).setTicked(!plants.get(i).isTicked());
+                                    updateView(i);
+                                    setNotiView();
+
+                                }
                             }
                         }
-                    }
-                    if (typeOfCare.equals(KEY.TYPE_FERTILIZER)) {
-                        for (int i = 0; i < plants.size(); i++) {
-                            if (plants.get(i).isTicked()) {
-                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_FERTILIZER);
-                                plants.get(i).setTicked(!plants.get(i).isTicked());
-                                updateView(i);
-                                setNotiView();
+                        if (typeOfCare.equals(KEY.TYPE_FERTILIZER)) {
+                            for (int i = 0; i < plants.size(); i++) {
+                                if (plants.get(i).isTicked()) {
+                                    DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_FERTILIZER);
+                                    plants.get(i).setTicked(!plants.get(i).isTicked());
+                                    updateView(i);
+                                    setNotiView();
+
+                                }
                             }
                         }
-                    }
-                    if (typeOfCare.equals(KEY.TYPE_SPRAY)) {
-                        for (int i = 0; i < plants.size(); i++) {
-                            if (plants.get(i).isTicked()) {
-                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_SPRAY);
-                                plants.get(i).setTicked(!plants.get(i).isTicked());
-                                updateView(i);
-                                setNotiView();
+                        if (typeOfCare.equals(KEY.TYPE_SPRAY)) {
+                            for (int i = 0; i < plants.size(); i++) {
+                                if (plants.get(i).isTicked()) {
+                                    DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_SPRAY);
+                                    plants.get(i).setTicked(!plants.get(i).isTicked());
+                                    updateView(i);
+                                    setNotiView();
+                                }
                             }
                         }
-                    }
-                    if (typeOfCare.equals(KEY.TYPE_PRUNE)) {
-                        for (int i = 0; i < plants.size(); i++) {
-                            if (plants.get(i).isTicked()) {
-                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_PRUNE);
-                                plants.get(i).setTicked(!plants.get(i).isTicked());
-                                updateView(i);
-                                setNotiView();
+                        if (typeOfCare.equals(KEY.TYPE_PRUNE)) {
+                            for (int i = 0; i < plants.size(); i++) {
+                                if (plants.get(i).isTicked()) {
+                                    DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_PRUNE);
+                                    plants.get(i).setTicked(!plants.get(i).isTicked());
+                                    updateView(i);
+                                    setNotiView();
+
+                                }
                             }
                         }
+                        imgPlus.setImageDrawable(getDrawable(R.drawable.ic_add_plant));
+                        toolBar.setBackgroundResource(R.drawable.img_water);
+                        visibleViewCare();
+                        typeOfCare = KEY.TYPE_CREATE;
+                        plantAdapter.disableCheckBox();
+                        plantAdapter.notifyDataSetChanged();
+                        ggInterstitialAd.show();
                     }
-                    imgPlus.setImageDrawable(getDrawable(R.drawable.ic_add_plant));
-                    visibleViewCare();
-                    typeOfCare = KEY.TYPE_CREATE;
-                    plantAdapter.disableCheckBox();
-                    plantAdapter.notifyDataSetChanged();
-                }*/
+                }
 
             }
         });
@@ -271,6 +336,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 typeOfCare = KEY.TYPE_FERTILIZER;
+                toolBar.setBackgroundResource(R.drawable.img_ferti);
                 invisibleViewCare();
                 imgPlus.setImageDrawable(getDrawable(R.drawable.ic_fertilize));
                 plantAdapter.enableCheckBox(typeOfCare);
@@ -282,6 +348,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 typeOfCare = KEY.TYPE_PRUNE;
+                toolBar.setBackgroundResource(R.drawable.img_prunes);
                 invisibleViewCare();
                 imgPlus.setImageDrawable(getDrawable(R.drawable.ic_prune));
                 plantAdapter.enableCheckBox(typeOfCare);
@@ -293,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 typeOfCare = KEY.TYPE_SPRAY;
+                toolBar.setBackgroundResource(R.drawable.img_sprays);
                 invisibleViewCare();
                 imgPlus.setImageDrawable(getDrawable(R.drawable.ic_spray));
                 plantAdapter.enableCheckBox(typeOfCare);
@@ -317,11 +385,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    private void loadRewardedVideoAd() {
+        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",
+                new AdRequest.Builder().build());
+    }
+
     private void openMorePlaceDialog() {
-        Dialog morePlaceDialog = new Dialog(MainActivity.this);
+        final Dialog morePlaceDialog = new Dialog(MainActivity.this);
         morePlaceDialog.setContentView(R.layout.more_plant_dialog);
 
+        Button btnYes = morePlaceDialog.findViewById(R.id.btnYes);
+        Button btnNoThanks = morePlaceDialog.findViewById(R.id.btnNoThanks);
 
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mRewardedVideoAd.isLoaded()) {
+                    mRewardedVideoAd.show();
+                    morePlaceDialog.dismiss();
+                }
+            }
+        });
+        btnNoThanks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                morePlaceDialog.dismiss();
+            }
+        });
+        Objects.requireNonNull(morePlaceDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         morePlaceDialog.show();
     }
 
@@ -404,6 +496,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    private void initGgInterstitialAd() {
+        try {
+            //Inter ads : Quảng cáo xen kẽ
+            ggInterstitialAd = new InterstitialAd(this);
+            //Truyền ID
+            ggInterstitialAd.setAdUnitId(getString(R.string.INTER_G));
+            // xử lí action
+            ggInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdClosed() {
+                    //loadAds
+                    requestNewInterstitial();
+                    Log.e("123", "onAdClosed: Load New ADS");
+                }
+
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    Log.e("123", "onAdLoaded: ");
+                }
+
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    super.onAdFailedToLoad(i);
+                    //Fail thì load FB
+                    /*try {
+                        if (isGgPriority) initFbInterstitialAd();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }*/
+                    Log.e("123", "onAdFailedToLoad: Load FB ADS");
+                }
+
+                @Override
+                public void onAdOpened() {
+
+                }
+            });
+            //LoadAds
+            requestNewInterstitial();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void requestNewInterstitial() {
+        try {
+            //Nếu không có gỡ ứng ụng .
+            if (!MySetting.isRemoveAds(this)) {
+                AdRequest adRequest = null;
+                //Check Yêu cầu sự đồng ý của người dùng ở Châu Âu
+                if (ConsentInformation.getInstance(this).getConsentStatus().toString().equals(ConsentStatus.PERSONALIZED) ||
+                        !ConsentInformation.getInstance(this).isRequestLocationInEeaOrUnknown()) {
+                    adRequest = new AdRequest.Builder().build();
+                } else {
+                    adRequest = new AdRequest.Builder()
+                            .addNetworkExtrasBundle(AdMobAdapter.class, Ads.getNonPersonalizedAdsBundle())
+                            .build();
+                }
+                //Load Ads
+                ggInterstitialAd.loadAd(adRequest);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -424,7 +584,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     plants.add(plant);
                     plantAdapter.notifyItemChanged(plants.size() - 1);
                     setNotiView();
-                    //ggInterstitialAd.show();
                 }
             }
         }
@@ -434,7 +593,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String typeResult = data.getStringExtra(KEY.TYPE_RESULT);
                 assert typeResult != null;
                 if (typeResult.equals(KEY.CREATE)) {
-                    //ggInterstitialAd.show();
                 }
             }
         }
@@ -486,6 +644,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 visibleViewCare();
                 typeOfCare = KEY.TYPE_CREATE;
                 imgPlus.setImageDrawable(getDrawable(R.drawable.ic_add_plant));
+                toolBar.setBackgroundResource(R.drawable.img_water);
                 plantAdapter.disableCheckBox();
                 plantAdapter.notifyDataSetChanged();
             }
@@ -560,6 +719,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initView() {
+        toolBar = findViewById(R.id.toolBar);
         txtNumberWater = findViewById(R.id.txtNumberWater);
         txtNumberPrune = findViewById(R.id.txtNumberPrune);
         txtNumberSpray = findViewById(R.id.txtNumberSpray);
@@ -619,10 +779,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onDestroy() {
+        mRewardedVideoAd.destroy(this);
         super.onDestroy();
         if (bp != null) {
             bp.release();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        mRewardedVideoAd.pause(this);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        mRewardedVideoAd.resume(this);
+        NotificationManager nMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (nMgr != null) {
+            nMgr.cancelAll();
+        }
+        super.onResume();
     }
 
     private int countND(int year, int month, int day) {

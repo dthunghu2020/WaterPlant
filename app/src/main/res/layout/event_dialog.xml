@@ -54,6 +54,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_background"
         android:clickable="true"
+        android:focusableInTouchMode="true"
         android:editable="false"
         android:hint=""
         android:padding="@dimen/_10sdp" />
@@ -88,6 +89,8 @@
                 android:id="@+id/edtEventName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
                 android:backgroundTint="#00000000"
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintEnd_toStartOf="@+id/spinnerEvent"

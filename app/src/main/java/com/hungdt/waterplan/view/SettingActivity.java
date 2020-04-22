@@ -1,9 +1,12 @@
 package com.hungdt.waterplan.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -34,14 +37,12 @@ import java.util.Random;
 
 public class SettingActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     private Switch aSwitch;
-    private TextView  txtRate, txtFeedback, txtShare, txtPolicy;
+    private TextView txtRate, txtFeedback, txtShare, txtPolicy;
     private CardView btnSaveName;
     private EditText edtUserName;
     private ImageView imgBack;
 
     String userName;
-
-    private UnifiedNativeAd nativeAd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,11 +53,11 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
         initView();
 
         //Native
-        int  random = new Random().nextInt(100);
-        if(random<=70){
-            Ads.initNativeGg((FrameLayout) findViewById(R.id.flNativeAds),this,true,true);
-        }else {
-            Ads.initNativeFB((FrameLayout) findViewById(R.id.flNativeAds),this,true,true);
+        int random = new Random().nextInt(100);
+        if (random <= 70) {
+            Ads.initNativeGg((FrameLayout) findViewById(R.id.flNativeAds), this, false, true);
+        } else {
+            Ads.initNativeFB((FrameLayout) findViewById(R.id.flNativeAds), this, false, true);
         }
 
         userName = DBHelper.getInstance(this).getUserName();
@@ -123,67 +124,6 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
 
         aSwitch.setOnCheckedChangeListener(this);
 
-        /*btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (edtUserName.getText().toString().isEmpty()) {
-                    Toast.makeText(SettingActivity.this, "You forget enter your name", Toast.LENGTH_SHORT).show();
-                } else {
-                    DBHelper.getInstance(SettingActivity.this).setUserName(userName, edtUserName.getText().toString());
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra(KEY.TYPE_RESULT, KEY.UPDATE);
-                    setResult(Activity.RESULT_OK, resultIntent);
-                    finish();
-                }
-            }
-        });
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });*/
-
-    }
-
-    private void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView) {
-
-        // Set other ad assets.
-        adView.setHeadlineView(adView.findViewById(R.id.ad_headline));
-        adView.setBodyView(adView.findViewById(R.id.ad_body));
-        adView.setCallToActionView(adView.findViewById(R.id.ad_call_to_action));
-        adView.setIconView(adView.findViewById(R.id.ad_app_icon));
-
-        // The headline and mediaContent are guaranteed to be in every UnifiedNativeAd.
-        ((TextView) adView.getHeadlineView()).setText(nativeAd.getHeadline());
-        //adView.getMediaView().setMediaContent(nativeAd.getMediaContent());
-
-        // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to
-        // check before trying to display them.
-        if (nativeAd.getBody() == null) {
-            adView.getBodyView().setVisibility(View.INVISIBLE);
-        } else {
-            adView.getBodyView().setVisibility(View.VISIBLE);
-            ((TextView) adView.getBodyView()).setText(nativeAd.getBody());
-        }
-
-        if (nativeAd.getCallToAction() == null) {
-            adView.getCallToActionView().setVisibility(View.INVISIBLE);
-        } else {
-            adView.getCallToActionView().setVisibility(View.VISIBLE);
-            ((Button) adView.getCallToActionView()).setText(nativeAd.getCallToAction());
-        }
-
-        if (nativeAd.getIcon() == null) {
-            adView.getIconView().setVisibility(View.GONE);
-        } else {
-            ((ImageView) adView.getIconView()).setImageDrawable(
-                    nativeAd.getIcon().getDrawable());
-            adView.getIconView().setVisibility(View.VISIBLE);
-        }
-
-        adView.setNativeAd(nativeAd);
     }
 
     private void initView() {
@@ -207,5 +147,14 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
             DBHelper.getInstance(this).setRemindNotification("On", "Off");
             Toast.makeText(this, "Notification is Off", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
     }
 }

@@ -4,16 +4,23 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,8 +49,6 @@ import com.google.ads.consent.ConsentStatus;
 import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -59,6 +64,8 @@ import com.hungdt.waterplan.dataset.Constant;
 import com.hungdt.waterplan.model.Event;
 import com.hungdt.waterplan.model.Plant;
 import com.hungdt.waterplan.model.Remind;
+
+import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -415,9 +422,9 @@ public class EditPlanActivity extends AppCompatActivity {
                 } else {
                     if (type.equals(KEY.TYPE_CREATE)) {
                         if (edtPlanNote.getText().toString().isEmpty()) {
-                            DBHelper.getInstance(EditPlanActivity.this).addPlan(edtPlanName.getText().toString(), currentPhotoPath, "");
+                            DBHelper.getInstance(EditPlanActivity.this).addPlant(edtPlanName.getText().toString(), currentPhotoPath, "");
                         } else {
-                            DBHelper.getInstance(EditPlanActivity.this).addPlan(edtPlanName.getText().toString(), currentPhotoPath, edtPlanNote.getText().toString());
+                            DBHelper.getInstance(EditPlanActivity.this).addPlant(edtPlanName.getText().toString(), currentPhotoPath, edtPlanNote.getText().toString());
                         }
                         if (reminds != null) {
                             String plantID = DBHelper.getInstance(EditPlanActivity.this).getLastPlanID();
@@ -440,9 +447,9 @@ public class EditPlanActivity extends AppCompatActivity {
                     }
                     if (type.equals(KEY.TYPE_EDIT)) {
                         if (edtPlanNote.getText().toString().isEmpty()) {
-                            DBHelper.getInstance(EditPlanActivity.this).updatePlan(plant.getPlantID(), edtPlanName.getText().toString(), currentPhotoPath, "");
+                            DBHelper.getInstance(EditPlanActivity.this).updatePlant(plant.getPlantID(), edtPlanName.getText().toString(), currentPhotoPath, "");
                         } else {
-                            DBHelper.getInstance(EditPlanActivity.this).updatePlan(plant.getPlantID(), edtPlanName.getText().toString(), currentPhotoPath, edtPlanNote.getText().toString());
+                            DBHelper.getInstance(EditPlanActivity.this).updatePlant(plant.getPlantID(), edtPlanName.getText().toString(), currentPhotoPath, edtPlanNote.getText().toString());
                         }
                         if (reminds.size() == 0) {
                             DBHelper.getInstance(EditPlanActivity.this).deletePlantRemind(plant.getPlantID());
@@ -914,9 +921,27 @@ public class EditPlanActivity extends AppCompatActivity {
         edtEventDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UIUtil.hideKeyboard(bottomSheetDialog.getContext(), Objects.requireNonNull(bottomSheetDialog.getCurrentFocus()));
                 new DatePickerDialog(EditPlanActivity.this, dateDialog, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        edtEventDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        edtEventName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
             }
         });
 
@@ -1095,16 +1120,43 @@ public class EditPlanActivity extends AppCompatActivity {
         edtLastTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                UIUtil.hideKeyboard(bottomSheetDialog.getContext(), Objects.requireNonNull(bottomSheetDialog.getCurrentFocus()));
                 new DatePickerDialog(EditPlanActivity.this, dateDialog, calendar
                         .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        edtLastTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
             }
         });
 
         edtRemindTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UIUtil.hideKeyboard(bottomSheetDialog.getContext(), Objects.requireNonNull(bottomSheetDialog.getCurrentFocus()));
                 showTimeDialog(edtRemindTime);
+            }
+        });
+        edtRemindTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        edtRemindDay.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
             }
         });
 
@@ -1222,7 +1274,45 @@ public class EditPlanActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        ggInterstitialAd.show();
-        super.onBackPressed();
+            openExitDialog();
+    }
+
+    private void openExitDialog() {
+        final Dialog exitDialog = new Dialog(this);
+        exitDialog.setContentView(R.layout.exit_edit_plant_dialog);
+
+        Button btnYes = exitDialog.findViewById(R.id.btnYes);
+        Button btnNoThanks = exitDialog.findViewById(R.id.btnNoThanks);
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exitDialog.dismiss();
+            }
+        });
+        btnNoThanks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exitDialog.dismiss();
+                finish();
+                ggInterstitialAd.show();
+            }
+        });
+        Objects.requireNonNull(exitDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        exitDialog.show();
+
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    private void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

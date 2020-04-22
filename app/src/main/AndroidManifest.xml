@@ -33,22 +33,28 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~1033173712"/>
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:launchMode="singleTask"
+            android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.EditPlanActivity" />
-        <activity android:name=".view.SettingActivity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name=".view.EditPlanActivity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name=".view.SettingActivity" />
         <activity
             android:name=".view.PolicyActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.RateAppActivity"
             android:launchMode="singleTask"
+            android:name=".view.RateAppActivity"
             android:noHistory="true"
             android:screenOrientation="unspecified"
             android:theme="@style/Theme.AppCompat.Translucent" />

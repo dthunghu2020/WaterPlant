@@ -44,6 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_USER_NAME = "USER_NAME";
     public static final String COLUMN_USER_REMIND_NOTIFICATION = "USER_RM_NOTI";
     public static final String COLUMN_USER_EVERY_DAY_NOTIFICATION= "USER_EVERY_DAY_NOTI";
+    public static final String COLUMN_PLANT_NUMBER= "USER_PLANT_NUMBER";
 
     public static final String SQL_CREATE_TABLE_PLAN = "CREATE TABLE " + TABLE_PLANT + "("
             + COLUMN_PLANT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -69,7 +70,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_TABLE_USER_DATA = "CREATE TABLE " + TABLE_USER_DATA + "("
             + COLUMN_USER_NAME + " TEXT NOT NULL, "
             + COLUMN_USER_REMIND_NOTIFICATION + " TEXT NOT NULL, "
-            + COLUMN_USER_EVERY_DAY_NOTIFICATION + " TEXT NOT NULL " + ");";
+            + COLUMN_USER_EVERY_DAY_NOTIFICATION + " TEXT NOT NULL, "
+            + COLUMN_PLANT_NUMBER + " TEXT NOT NULL " + ");";
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -82,27 +84,27 @@ public class DBHelper extends SQLiteOpenHelper {
         return instance;
     }
 
-    public void addPlan(String planName, String planAvatar, String planNote) {
+    public void addPlant(String plantName, String planAvatar, String plantNote) {
         SQLiteDatabase database = instance.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_PLANT_NAME, planName);
+        values.put(COLUMN_PLANT_NAME, plantName);
         values.put(COLUMN_PLANT_IMAGE, planAvatar);
-        values.put(COLUMN_PLANT_NOTE, planNote);
+        values.put(COLUMN_PLANT_NOTE, plantNote);
         database.insert(TABLE_PLANT, null, values);
         database.close();
     }
 
-    public void updatePlan(String planID, String planName, String planAvatar, String planNote) {
+    public void updatePlant(String plantID, String plantName, String plantAvatar, String plantNote) {
 
         SQLiteDatabase db = instance.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_PLANT_ID, planID);
-        values.put(COLUMN_PLANT_NAME, planName);
-        values.put(COLUMN_PLANT_IMAGE, planAvatar);
-        values.put(COLUMN_PLANT_NOTE, planNote);
-        db.update(TABLE_PLANT, values, COLUMN_PLANT_ID + "='" + planID + "'", null);
+        values.put(COLUMN_PLANT_ID, plantID);
+        values.put(COLUMN_PLANT_NAME, plantName);
+        values.put(COLUMN_PLANT_IMAGE, plantAvatar);
+        values.put(COLUMN_PLANT_NOTE, plantNote);
+        db.update(TABLE_PLANT, values, COLUMN_PLANT_ID + "='" + plantID + "'", null);
         db.close();
     }
 
@@ -162,13 +164,14 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void createUserData(String userName, String rmNoti,String eNoti) {
+    public void createUserData(String userName, String rmNoti,String eNoti,String nbPlant) {
         SQLiteDatabase database = instance.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_NAME, userName);
         values.put(COLUMN_USER_REMIND_NOTIFICATION, rmNoti);
         values.put(COLUMN_USER_EVERY_DAY_NOTIFICATION, eNoti);
+        values.put(COLUMN_PLANT_NUMBER, nbPlant);
         database.insert(TABLE_USER_DATA, null, values);
         database.close();
     }
@@ -197,6 +200,17 @@ public class DBHelper extends SQLiteOpenHelper {
         db.update(TABLE_USER_DATA, values, COLUMN_USER_NAME + "='" + oldName + "'", null);
         db.close();
     }
+
+    public void setNumberOfPlant(String oldNb, String nbPlant) {
+        SQLiteDatabase db = instance.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PLANT_NUMBER, nbPlant);
+        db.update(TABLE_USER_DATA, values, COLUMN_PLANT_NUMBER + "='" + oldNb + "'", null);
+        db.close();
+    }
+
+
 
     public void refreshRemind(String plantID, String dateTime, String type) {
         SQLiteDatabase db = instance.getWritableDatabase();
@@ -329,6 +343,22 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return name;
+    }
+
+    public String getNumberOfPlant() {
+        SQLiteDatabase db = instance.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(String.format("SELECT * FROM '%s';", TABLE_USER_DATA), null);
+        String nbPlant ="";
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                nbPlant = cursor.getString(cursor.getColumnIndex(COLUMN_PLANT_NUMBER));
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        db.close();
+        return nbPlant;
     }
 
     public List<Plant> getAllPlant() {

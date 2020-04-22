@@ -125,7 +125,10 @@
                     android:id="@+id/edtPlanName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Plan Name" />
+                    android:clickable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="Plan Name"
+                    android:inputType="textCapWords|text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -732,6 +735,8 @@
                     android:id="@+id/edtPlanNote"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusableInTouchMode="true"
                     android:hint="Note" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -743,6 +748,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:inputType="textCapWords|text"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent" />
 

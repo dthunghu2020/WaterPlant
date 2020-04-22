@@ -229,7 +229,6 @@ public class PlantWorker extends Worker {
                 .setAutoCancel(true)
                 .setContentIntent(resultPendingIntent);
 
-
         manager.notify(i, builder.build());
     }
 

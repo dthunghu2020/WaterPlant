@@ -38,6 +38,7 @@
 
     <EditText
         android:id="@+id/edtLastTime"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_background"
@@ -70,6 +71,8 @@
             <EditText
                 android:id="@+id/edtRemindDay"
                 android:layout_width="match_parent"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_background"
                 android:inputType="number"
@@ -95,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_background"
                 android:clickable="true"
+                android:focusableInTouchMode="true"
                 android:editable="false"
                 android:focusable="true"
                 android:padding="@dimen/_10sdp" />
