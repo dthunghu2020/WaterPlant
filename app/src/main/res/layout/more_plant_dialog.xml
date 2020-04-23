@@ -32,6 +32,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:textColor="@color/blue_4"
             android:id="@+id/btnYes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

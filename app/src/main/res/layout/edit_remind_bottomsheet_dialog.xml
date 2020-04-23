@@ -113,6 +113,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:textColor="@color/blue_4"
             android:id="@+id/btnOk"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

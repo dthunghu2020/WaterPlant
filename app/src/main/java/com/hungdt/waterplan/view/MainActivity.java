@@ -116,8 +116,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Helper.setColorStatusBar(this, R.color.status_bar);
 
-        initView();
-
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -126,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Inter
         initGgInterstitialAd();
+
+        initView();
 
         //Video
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
@@ -245,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         plantAdapter = new PlantAdapter(this, plants);
         rcvPlan.setLayoutManager(new LinearLayoutManager(this));
         rcvPlan.setAdapter(plantAdapter);
+        rcvPlan.setFocusable(false);
         Helper.setColorStatusBar(this, R.color.status_bar);
 
         String username = DBHelper.getInstance(this).getUserName();
@@ -256,68 +257,66 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (numberOfPlant == plants.size()) {
-                    openMorePlaceDialog();
-                } else {
-                    if (typeOfCare.equals(KEY.TYPE_CREATE)) {
+                if (typeOfCare.equals(KEY.TYPE_CREATE)) {
+                    if (numberOfPlant == plants.size()) {
+                        openMorePlaceDialog();
+                    }else {
                         Intent intent = new Intent(MainActivity.this, EditPlanActivity.class);
                         intent.putExtra(KEY.TYPE, KEY.TYPE_CREATE);
                         startActivityForResult(intent, REQUEST_CODE_ADD_PLANT);
                         setNotiView();
-                    } else {
-                        if (typeOfCare.equals(KEY.TYPE_WATER)) {
-                            for (int i = 0; i < plants.size(); i++) {
-                                if (plants.get(i).isTicked()) {
-                                    DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_WATER);
-                                    plants.get(i).setTicked(!plants.get(i).isTicked());
-                                    updateView(i);
-                                    setNotiView();
-
-                                }
-                            }
-                        }
-                        if (typeOfCare.equals(KEY.TYPE_FERTILIZER)) {
-                            for (int i = 0; i < plants.size(); i++) {
-                                if (plants.get(i).isTicked()) {
-                                    DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_FERTILIZER);
-                                    plants.get(i).setTicked(!plants.get(i).isTicked());
-                                    updateView(i);
-                                    setNotiView();
-
-                                }
-                            }
-                        }
-                        if (typeOfCare.equals(KEY.TYPE_SPRAY)) {
-                            for (int i = 0; i < plants.size(); i++) {
-                                if (plants.get(i).isTicked()) {
-                                    DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_SPRAY);
-                                    plants.get(i).setTicked(!plants.get(i).isTicked());
-                                    updateView(i);
-                                    setNotiView();
-                                }
-                            }
-                        }
-                        if (typeOfCare.equals(KEY.TYPE_PRUNE)) {
-                            for (int i = 0; i < plants.size(); i++) {
-                                if (plants.get(i).isTicked()) {
-                                    DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_PRUNE);
-                                    plants.get(i).setTicked(!plants.get(i).isTicked());
-                                    updateView(i);
-                                    setNotiView();
-
-                                }
-                            }
-                        }
-                        imgPlus.setImageDrawable(getDrawable(R.drawable.ic_add_plant));
-                        toolBar.setBackgroundResource(R.drawable.img_water);
-                        visibleViewCare();
-                        typeOfCare = KEY.TYPE_CREATE;
-                        plantAdapter.disableCheckBox();
-                        plantAdapter.notifyDataSetChanged();
-                        ggInterstitialAd.show();
                     }
-                }
+                } else {
+                    if (typeOfCare.equals(KEY.TYPE_WATER)) {
+                        for (int i = 0; i < plants.size(); i++) {
+                            if (plants.get(i).isTicked()) {
+                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_WATER);
+                                plants.get(i).setTicked(!plants.get(i).isTicked());
+                                updateView(i);
+                                setNotiView();
 
+                            }
+                        }
+                    }
+                    if (typeOfCare.equals(KEY.TYPE_FERTILIZER)) {
+                        for (int i = 0; i < plants.size(); i++) {
+                            if (plants.get(i).isTicked()) {
+                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_FERTILIZER);
+                                plants.get(i).setTicked(!plants.get(i).isTicked());
+                                updateView(i);
+                                setNotiView();
+
+                            }
+                        }
+                    }
+                    if (typeOfCare.equals(KEY.TYPE_SPRAY)) {
+                        for (int i = 0; i < plants.size(); i++) {
+                            if (plants.get(i).isTicked()) {
+                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_SPRAY);
+                                plants.get(i).setTicked(!plants.get(i).isTicked());
+                                updateView(i);
+                                setNotiView();
+                            }
+                        }
+                    }
+                    if (typeOfCare.equals(KEY.TYPE_PRUNE)) {
+                        for (int i = 0; i < plants.size(); i++) {
+                            if (plants.get(i).isTicked()) {
+                                DBHelper.getInstance(MainActivity.this).refreshRemind(plants.get(i).getPlantID(), getInstantDateTime(), KEY.TYPE_PRUNE);
+                                plants.get(i).setTicked(!plants.get(i).isTicked());
+                                updateView(i);
+                                setNotiView();
+
+                            }
+                        }
+                    }
+                    imgPlus.setImageDrawable(getDrawable(R.drawable.ic_add_plant));
+                    toolBar.setBackgroundResource(R.drawable.img_water);
+                    visibleViewCare();
+                    typeOfCare = KEY.TYPE_CREATE;
+                    plantAdapter.disableCheckBox();
+                    plantAdapter.notifyDataSetChanged();
+                }
             }
         });
 

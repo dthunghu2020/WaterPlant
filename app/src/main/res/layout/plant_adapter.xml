@@ -21,8 +21,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imgPlantAvatar"
-            android:layout_width="@dimen/_72sdp"
-            android:layout_height="@dimen/_72sdp"
+            android:layout_width="@dimen/_68sdp"
+            android:layout_height="@dimen/_68sdp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_6sdp"
             android:layout_marginEnd="@dimen/_2sdp"
@@ -34,22 +34,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
 
-            <TextView
-                android:id="@+id/txtPlanName"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_5sdp"
-                android:text="Plan Name"
-                android:textColor="@color/black_2"
-                android:textSize="18sp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtCbNoti"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:background="@drawable/ic_noti"
+                    android:gravity="center"
+                    android:text="i"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtPlanName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="Plan Name"
+                    android:textColor="@color/black_2"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/txtCbNoti"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_height="@dimen/_22sdp"
                 android:layout_marginTop="@dimen/_6sdp">
 
                 <LinearLayout
@@ -60,9 +86,10 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clWater"
-                        android:layout_width="@dimen/_46sdp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_2sdp">
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
 
                         <ProgressBar
                             android:id="@+id/pbWater"
@@ -81,8 +108,8 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
+                                android:layout_width="@dimen/_14sdp"
+                                android:layout_height="@dimen/_14sdp"
                                 android:src="@drawable/ic_watering" />
 
                             <TextView
@@ -93,16 +120,17 @@
                                 android:gravity="center_vertical"
                                 android:text="888 days"
                                 android:textColor="@color/white"
-                                android:textSize="9sp" />
+                                android:textSize="10sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clFertilizer"
-                        android:layout_width="@dimen/_46sdp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_2sdp">
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
 
                         <ProgressBar
                             android:id="@+id/pbFertilizer"
@@ -121,8 +149,8 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
+                                android:layout_width="@dimen/_14sdp"
+                                android:layout_height="@dimen/_14sdp"
                                 android:src="@drawable/ic_fertilize" />
 
 
@@ -134,16 +162,17 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="9sp" />
+                                android:textSize="10sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clPrune"
-                        android:layout_width="@dimen/_46sdp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_2sdp">
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
 
                         <ProgressBar
                             android:id="@+id/pbPrune"
@@ -162,8 +191,8 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
+                                android:layout_width="@dimen/_14sdp"
+                                android:layout_height="@dimen/_14sdp"
                                 android:src="@drawable/ic_prune" />
 
                             <TextView
@@ -174,16 +203,17 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="9sp" />
+                                android:textSize="10sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clSpray"
-                        android:layout_width="@dimen/_46sdp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_2sdp">
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1">
 
                         <ProgressBar
                             android:id="@+id/pbSpray"
@@ -202,8 +232,8 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
+                                android:layout_width="@dimen/_14sdp"
+                                android:layout_height="@dimen/_14sdp"
                                 android:src="@drawable/ic_spray" />
 
                             <TextView
@@ -214,7 +244,7 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="9sp" />
+                                android:textSize="10sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -264,7 +294,7 @@
                                 android:gravity="center_vertical"
                                 android:text="888 days"
                                 android:textColor="@color/white"
-                                android:textSize="8sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -308,7 +338,7 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="8sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -351,7 +381,7 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="8sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -374,6 +404,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
+
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:padding="@dimen/_1sdp"
@@ -394,7 +425,7 @@
                                 android:gravity="center_vertical"
                                 android:text="88 days"
                                 android:textColor="@color/white"
-                                android:textSize="8sp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -420,8 +451,8 @@
 
                 <ImageView
                     android:id="@+id/imgFlag"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
                     android:background="@drawable/ic_event" />
 
                 <LinearLayout
@@ -443,7 +474,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="09/04/2020"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <ImageView
                             android:layout_width="1sp"
@@ -456,8 +487,10 @@
                             android:id="@+id/txtEvent1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:text="Wedding, cultivation"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -474,7 +507,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="09/04/2020"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <ImageView
                             android:layout_width="1sp"
@@ -487,8 +520,10 @@
                             android:id="@+id/txtEvent2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:text="Wedding, cultivation"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -505,7 +540,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="09/04/2020"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                         <ImageView
                             android:layout_width="1sp"
@@ -517,9 +552,11 @@
                         <TextView
                             android:id="@+id/txtEvent3"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="16dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
                             android:text="Wedding, cultivation"
-                            android:textSize="10sp" />
+                            android:textSize="12sp" />
 
                     </LinearLayout>
                 </LinearLayout>

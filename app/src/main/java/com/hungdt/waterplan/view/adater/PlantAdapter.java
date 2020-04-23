@@ -68,7 +68,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
         holder.txtPlantName.setText(plants.get(position).getPlantName());
         reminds = plants.get(position).getReminds();
         events = plants.get(position).getEvents();
-        setVisibleGone(holder);
+        setVisibleItem(holder);
 
         if (reminds != null) {
             Date date;
@@ -88,7 +88,12 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            boolean checkData = false;
             for (int i = 0; i < reminds.size(); i++) {
+                if(reminds.get(i).getRemindType().equals(typeOfCare)){
+                    checkData=true;
+                }
+                //Water
                 if (reminds.get(i).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.water))) {
                     holder.clWater.setVisibility(View.VISIBLE);
                     if (typeOfCare!=null){
@@ -113,10 +118,15 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
                     } else {
                         holder.pbWater.setProgress(0);
                         holder.pbWaterCB.setProgress(0);
+                        if(cbVisible &&typeOfCare.equals(KEY.TYPE_WATER)){
+                            holder.txtCbNoti.setVisibility(View.VISIBLE);
+                        }
                     }
                     holder.txtPlantWater.setText(reminds.get(i).getCareCycle() + " days");
                     holder.txtPlantWaterCB.setText(reminds.get(i).getCareCycle() + " days");
                 }
+
+                //Fertilizer
                 if (reminds.get(i).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.fertilizer))) {
                     holder.clFertilizer.setVisibility(View.VISIBLE);
                     if (typeOfCare!=null){
@@ -141,10 +151,15 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
                     } else {
                         holder.pbFertilizer.setProgress(0);
                         holder.pbFertilizerCB.setProgress(0);
+                        if(cbVisible &&typeOfCare.equals(KEY.TYPE_FERTILIZER)){
+                            holder.txtCbNoti.setVisibility(View.VISIBLE);
+                        }
                     }
                     holder.txtPlantFertilizer.setText(reminds.get(i).getCareCycle() + " days");
                     holder.txtPlantFertilizerCB.setText(reminds.get(i).getCareCycle() + " days");
                 }
+
+                //Prune
                 if (reminds.get(i).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.prune))) {
                     holder.clPrune.setVisibility(View.VISIBLE);
                     if (typeOfCare!=null){
@@ -169,10 +184,15 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
                     } else {
                         holder.pbPrune.setProgress(0);
                         holder.pbPruneCB.setProgress(0);
+                        if(cbVisible &&typeOfCare.equals(KEY.TYPE_PRUNE)){
+                            holder.txtCbNoti.setVisibility(View.VISIBLE);
+                        }
                     }
                     holder.txtPlantPrune.setText(reminds.get(i).getCareCycle() + " days");
                     holder.txtPlantPruneCB.setText(reminds.get(i).getCareCycle() + " days");
                 }
+
+                //Spray
                 if (reminds.get(i).getRemindType().equals(layoutInflater.getContext().getResources().getString(R.string.spray))) {
                     holder.clSpray.setVisibility(View.VISIBLE);
                     if (typeOfCare!=null){
@@ -197,13 +217,19 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
                     } else {
                         holder.pbSpray.setProgress(0);
                         holder.pbSprayCB.setProgress(0);
+                        if(cbVisible &&typeOfCare.equals(KEY.TYPE_SPRAY)){
+                            holder.txtCbNoti.setVisibility(View.VISIBLE);
+                        }
                     }
                     holder.txtPlantSpray.setText(reminds.get(i).getCareCycle() + " days");
                     holder.txtPlantSprayCB.setText(reminds.get(i).getCareCycle() + " days");
                 }
-
+            }
+            if(!checkData&& cbVisible){
+                holder.llItem.setVisibility(View.GONE);
             }
         }
+
         if (typeOfCare != null) {
             holder.lineEvent.setVisibility(View.GONE);
             holder.eventView.setVisibility(View.GONE);
@@ -245,7 +271,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
         });
     }
 
-    private void setVisibleGone(PlanHolder holder) {
+    private void setVisibleItem(PlanHolder holder) {
         if (!cbVisible) {
             holder.llCheckBox.setVisibility(View.INVISIBLE);
             holder.llShow.setVisibility(View.VISIBLE);
@@ -256,6 +282,8 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
             holder.cbPlant.setVisibility(View.VISIBLE);
             holder.cbPlant.setChecked(false);
         }
+        holder.llItem.setVisibility(View.VISIBLE);
+        holder.txtCbNoti.setVisibility(View.GONE);
         holder.lineEvent.setVisibility(View.GONE);
         holder.eventView.setVisibility(View.GONE);
         holder.clWater.setVisibility(View.GONE);
@@ -276,13 +304,15 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlanHolder> 
     class PlanHolder extends RecyclerView.ViewHolder {
         private CheckBox cbPlant;
         private ImageView imgPlantAvatar, lineEvent;
-        private LinearLayout eventView, event1, event2, event3, llShow, llCheckBox;
+        private LinearLayout llItem,eventView, event1, event2, event3, llShow, llCheckBox;
         private ProgressBar pbWater, pbFertilizer, pbPrune, pbSpray, pbWaterCB, pbFertilizerCB, pbPruneCB, pbSprayCB;
-        private TextView txtPlantName, txtPlantWater, txtPlantFertilizer, txtPlantPrune, txtPlantSpray, txtPlantWaterCB, txtPlantFertilizerCB, txtPlantPruneCB, txtPlantSprayCB, txtEvent1, txtEventDay1, txtEvent2, txtEventDay2, txtEvent3, txtEventDay3;
+        private TextView txtPlantName, txtCbNoti, txtPlantWater, txtPlantFertilizer, txtPlantPrune, txtPlantSpray, txtPlantWaterCB, txtPlantFertilizerCB, txtPlantPruneCB, txtPlantSprayCB, txtEvent1, txtEventDay1, txtEvent2, txtEventDay2, txtEvent3, txtEventDay3;
         private ConstraintLayout clWater, clFertilizer, clPrune, clSpray, clWaterCB, clFertilizerCB, clPruneCB, clSprayCB;
 
         public PlanHolder(@NonNull View itemView) {
             super(itemView);
+            txtCbNoti = itemView.findViewById(R.id.txtCbNoti);
+            llItem = itemView.findViewById(R.id.llItem);
             llShow = itemView.findViewById(R.id.LLShow);
             llCheckBox = itemView.findViewById(R.id.LLCheckBox);
             cbPlant = itemView.findViewById(R.id.cbPlant);

@@ -83,8 +83,8 @@
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/imgPlantAvatar"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_90sdp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:scaleType="centerCrop"
@@ -583,7 +583,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:orientation="horizontal"
-                android:padding="@dimen/_8sdp"
+                android:padding="@dimen/_6sdp"
                 android:weightSum="3"
                 app:layout_constraintTop_toBottomOf="@+id/txtTitleEvent">
 
@@ -597,38 +597,39 @@
                         android:id="@+id/flag1"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/ic_event"
                         android:padding="@dimen/_4sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtEvent1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:paddingEnd="@dimen/_2sdp"
                         android:text="Dust Removal"
                         android:textColor="@color/black_2"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/txtEventDay1" />
 
                     <TextView
                         android:id="@+id/txtEventDay1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
                         android:text="04/10/2020"
                         android:textSize="10sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtEvent1" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:layout_width="@dimen/_1sdp"
-                        android:layout_height="@dimen/_28sdp"
+                        android:layout_height="@dimen/_26sdp"
                         android:background="@color/line_gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -644,7 +645,8 @@
                         android:id="@+id/flag2"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/ic_event"
                         android:padding="@dimen/_4sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -653,29 +655,30 @@
 
                     <TextView
                         android:id="@+id/txtEvent2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:paddingEnd="@dimen/_2sdp"
                         android:text="Dust Removal"
                         android:textColor="@color/black_2"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/txtEventDay2" />
 
                     <TextView
                         android:id="@+id/txtEventDay2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
                         android:text="04/10/2020"
                         android:textSize="10sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtEvent2" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:layout_width="@dimen/_1sdp"
-                        android:layout_height="@dimen/_28sdp"
+                        android:layout_height="@dimen/_26sdp"
                         android:background="@color/line_gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -691,7 +694,8 @@
                         android:id="@+id/flag3"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/ic_event"
                         android:padding="@dimen/_4sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -700,25 +704,26 @@
 
                     <TextView
                         android:id="@+id/txtEvent3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:paddingEnd="@dimen/_2sdp"
                         android:text="Dust Removal"
                         android:textColor="@color/black_2"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/txtEventDay3" />
 
                     <TextView
                         android:id="@+id/txtEventDay3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
                         android:text="04/10/2020"
                         android:textSize="10sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtEvent3" />
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 

@@ -32,6 +32,7 @@
         android:weightSum="2">
 
         <Button
+            android:textColor="@color/blue_4"
             android:id="@+id/btnYes"
             android:layout_width="0dp"
             android:background="@drawable/shape_conner_gray"
