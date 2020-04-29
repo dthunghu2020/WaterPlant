@@ -13,11 +13,11 @@
 
         <ImageView
             android:id="@+id/imgBack"
-            android:layout_width="@dimen/_22sdp"
-            android:layout_height="@dimen/_22sdp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_15sdp"
-            android:padding="@dimen/_5sdp"
+            android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_x" />
 
         <TextView
@@ -29,37 +29,26 @@
             android:layout_toEndOf="@id/imgBack"
             android:text="Add Plant"
             android:textColor="@color/black_2"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
+        <Button
             android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/shape_btn_green"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/green"
-            app:cardCornerRadius="@dimen/_10sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_15sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_15sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:text="Save"
-                android:textColor="@color/white" />
-        </androidx.cardview.widget.CardView>
+            android:text="Save"
+            android:textColor="@color/white" />
 
         <ImageView
             android:id="@+id/imgDeletePlant"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_toStartOf="@id/btnSave"
             android:padding="@dimen/_2sdp"
             android:src="@drawable/ic_delete" />
@@ -161,8 +150,8 @@
 
                     <ImageView
                         android:id="@+id/iconWater"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:background="@drawable/ic_watering"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -266,8 +255,8 @@
 
                     <ImageView
                         android:id="@+id/iconPrune"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:background="@drawable/ic_prune"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -372,8 +361,8 @@
 
                     <ImageView
                         android:id="@+id/iconSpray"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:background="@drawable/ic_spray"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -479,8 +468,8 @@
 
                     <ImageView
                         android:id="@+id/iconFertilize"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:background="@drawable/ic_fertilize"
                         app:layout_constraintBottom_toBottomOf="parent"

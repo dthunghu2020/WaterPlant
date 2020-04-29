@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_2sdp"
         android:gravity="center_horizontal"
-        android:text="Do you want to save it first?"
+        android:text="Are you sure you want to leave it?!"
         android:textColor="@color/black_2"
         android:textSize="16sp" />
 
@@ -41,25 +41,28 @@
         android:orientation="horizontal">
 
         <Button
-            android:textColor="@color/blue_4"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_btn_green"
             android:id="@+id/btnYes"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_6sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_weight="1"
-            android:background="@drawable/shape_conner_gray"
             android:text="Yes"
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btnNoThanks"
+            android:id="@+id/btnBack"
             android:layout_width="0dp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_6sdp"
             android:layout_weight="1"
-            android:background="@drawable/shape_conner_gray"
-            android:text="No,Thanks"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_btn_green"
+            android:text="Back"
             android:textAllCaps="false" />
     </LinearLayout>
 </LinearLayout>

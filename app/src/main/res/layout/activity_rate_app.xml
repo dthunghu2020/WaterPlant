@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="2dp">
 
         <LinearLayout
@@ -35,7 +35,7 @@
 
                 <ImageView
                     android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_gravity="center"

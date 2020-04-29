@@ -5,6 +5,7 @@
     android:id="@+id/draw_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     tools:context=".view.MainActivity">
     <!--tools:openDrawer="start"-->
@@ -23,26 +24,39 @@
         <RelativeLayout
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_130sdp"
-            android:background="@drawable/img_water"
+            android:layout_height="@dimen/_100sdp"
             app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgToolBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/txtHi"
+                android:background="@drawable/img_water" />
 
             <TextView
                 android:id="@+id/txtHi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_28sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:text="Hi,"
                 android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/txtUserName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/txtHi"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_70sdp"
                 android:layout_toEndOf="@+id/txtHi"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="Planter"
                 android:textColor="@color/dark_blue"
                 android:textSize="22sp"
@@ -63,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtText"
                 android:layout_alignStart="@+id/txtText"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -79,8 +93,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:text="Waterings"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:text="Watering"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -105,7 +119,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
                     android:text="Prune"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -115,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/waterTT"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_toEndOf="@id/waterTT"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -132,7 +146,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
                     android:text="Spray"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -157,78 +171,212 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
                     android:text="Fertilize"
                     android:textSize="12sp" />
             </LinearLayout>
 
-
-            <ImageView
-                android:id="@+id/imgMenu"
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/ic_menu" />
+                android:layout_alignParentTop="true">
+
+                <ImageView
+                    android:id="@+id/imgMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:src="@drawable/ic_menu" />
+
+                <ImageView
+                    android:layout_width="@dimen/_6sdp"
+                    android:layout_height="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_11sdp"
+                    android:background="@drawable/ic_noti" />
+            </FrameLayout>
+
         </RelativeLayout>
-        <ScrollView
-            app:layout_constraintTop_toBottomOf="@+id/toolBar"
-            app:layout_constraintBottom_toBottomOf="parent"
+
+        <LinearLayout
+            android:id="@+id/nativeAds"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
-            <LinearLayout
-                android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar">
+
+            <FrameLayout
+                android:id="@+id/flNativeAds"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/nativeAds"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nativeAds">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_background">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <FrameLayout
-                        android:id="@+id/flNativeAds"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_450sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/shape_background">
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/txtPlant"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_16sdp"
-                        android:layout_marginTop="@dimen/_8sdp"
                         android:text="My Plant"
-                        android:textStyle="bold"
                         android:textColor="@color/dark_blue"
-                        android:textSize="20sp"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvGarden"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_6sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_6sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="@dimen/_16sdp"
+                                android:background="@drawable/ic_store" />
+
+                            <TextView
+                                android:id="@+id/txtGarden"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:text="0/3"
+                                android:textColor="@color/black_2" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:id="@+id/cvGems"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/cvGarden"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_6sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_6sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_14sdp"
+                                android:layout_height="@dimen/_16sdp"
+                                android:background="@drawable/gem" />
+
+                            <TextView
+                                android:id="@+id/txtGems"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:text="00"
+                                android:textColor="@color/black_2" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clTitle">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcvPlan"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@drawable/shape_conner_white"
                         android:paddingStart="@dimen/_3sdp"
                         android:paddingTop="@dimen/_3sdp"
                         android:paddingEnd="@dimen/_3sdp"
-                        android:paddingBottom="@dimen/_40sdp"
+                        android:paddingBottom="@dimen/_48sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/txtPlant" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                    <LinearLayout
+                        android:id="@+id/llEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_45sdp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/_120sdp"
+                            android:layout_height="@dimen/_120sdp"
+                            android:background="@drawable/empty_condition" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="Start tracking by pressing (+) button " />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="to add your first plant!" />
+                    </LinearLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-        </ScrollView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
         <RelativeLayout
@@ -241,37 +389,38 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/shape_bg_icon" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgPlus"
-                android:layout_width="@dimen/_65sdp"
-                android:layout_height="@dimen/_65sdp"
+                android:layout_width="@dimen/_72sdp"
+                android:layout_height="@dimen/_72sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/_5sdp"
                 android:src="@drawable/ic_add_plant" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clWater"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_toStartOf="@+id/imgPlus">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_watering" />
+                    android:src="@drawable/ic_watering_button" />
 
                 <TextView
                     android:id="@+id/txtWaterNoti"
                     android:layout_width="@dimen/_12sdp"
                     android:layout_height="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     android:background="@drawable/ic_noti"
                     android:gravity="center"
                     android:text="0"
@@ -285,23 +434,25 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clFertilizer"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_toEndOf="@+id/imgPlus">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_fertilize" />
+                    android:src="@drawable/ic_fertilize_button" />
 
                 <TextView
                     android:id="@+id/txtFertilizerNoti"
                     android:layout_width="@dimen/_12sdp"
                     android:layout_height="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     android:background="@drawable/ic_noti"
                     android:gravity="center"
                     android:text="0"
@@ -314,23 +465,25 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clPrune"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
                 android:layout_toStartOf="@+id/clWater">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_prune"
+                    android:src="@drawable/ic_prune_button"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/txtPruneNoti"
                     android:layout_width="@dimen/_12sdp"
                     android:layout_height="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     android:background="@drawable/ic_noti"
                     android:gravity="center"
                     android:text="0"
@@ -343,23 +496,25 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clSpray"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
                 android:layout_toEndOf="@+id/clFertilizer">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_spray" />
+                    android:src="@drawable/ic_spray_button" />
 
                 <TextView
                     android:id="@+id/txtSprayNoti"
                     android:layout_width="@dimen/_12sdp"
                     android:layout_height="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     android:background="@drawable/ic_noti"
                     android:gravity="center"
                     android:text="0"

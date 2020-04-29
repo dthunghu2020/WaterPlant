@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:installLocation="auto"
-    package="com.hungdt.waterplan">
+    package="com.hungdt.waterplant"
+    android:installLocation="auto">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -10,10 +14,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
-        android:name=".App"
+        android:windowSoftInputMode="adjustPan"
+        android:name="com.hungdt.waterplant.App"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -28,14 +35,16 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~1033173712"/>
+            android:value="ca-app-pub-3940256099942544~1033173712" />
+
         <activity
-            android:launchMode="singleTask"
-            android:name=".view.MainActivity">
+            android:name="com.hungdt.waterplant.view.MainActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,22 +52,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:launchMode="singleTask"
-            android:name=".view.EditPlanActivity" />
+            android:windowSoftInputMode="adjustPan"
+            android:name="com.hungdt.waterplant.view.EditPlanActivity"
+            android:launchMode="singleTask" />
         <activity
-            android:launchMode="singleTask"
-            android:name=".view.SettingActivity" />
+            android:name="com.hungdt.waterplant.view.SettingActivity"
+            android:launchMode="singleTask" />
         <activity
-            android:name=".view.PolicyActivity"
+            android:name="com.hungdt.waterplant.view.PolicyActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.hungdt.waterplant.view.RateAppActivity"
             android:launchMode="singleTask"
-            android:name=".view.RateAppActivity"
             android:noHistory="true"
             android:screenOrientation="unspecified"
             android:theme="@style/Theme.AppCompat.Translucent" />
-        <activity android:name=".view.VipActivity" />
-        <receiver android:name=".AlertReceiver" />
+        <activity android:name="com.hungdt.waterplant.view.VipActivity" />
+
+        <receiver android:name="com.hungdt.waterplant.AlertReceiver" />
     </application>
 </manifest>

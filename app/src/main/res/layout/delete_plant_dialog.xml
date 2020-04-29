@@ -22,7 +22,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:gravity="center"
         android:text="Are You Sure You Want To Delete Plant?!"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,23 +32,26 @@
         android:weightSum="2">
 
         <Button
-            android:textColor="@color/blue_4"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_btn_green"
             android:id="@+id/btnYes"
             android:layout_width="0dp"
-            android:background="@drawable/shape_conner_gray"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:layout_weight="1"
             android:text="YES" />
 
         <Button
-            android:id="@+id/btnNo"
+            android:id="@+id/btnCancel"
             android:layout_width="0dp"
-            android:background="@drawable/shape_conner_gray"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_btn_green"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_3sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:layout_weight="1"
             android:text="NO" />
     </LinearLayout>

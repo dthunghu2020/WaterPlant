@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1069834889874",
+    "firebase_url": "https://waterplant-e3451.firebaseio.com",
+    "project_id": "waterplant-e3451",
+    "storage_bucket": "waterplant-e3451.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069834889874:android:eb3e165f13ddca6a99544b",
+        "android_client_info": {
+          "package_name": "com.hungdt.waterplant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069834889874-uof4aco9jhadeuufmkrd5d5mahm9440m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBovr9fs_vIp5O-BfLcjscBuaBOoFOSm8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069834889874-uof4aco9jhadeuufmkrd5d5mahm9440m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
